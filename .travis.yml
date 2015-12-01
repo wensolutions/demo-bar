@@ -37,7 +37,7 @@ before_script:
     # Use the Git mirror of WordPress.
     - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_DEVELOP_DIR
     # Set up unit tests.
-    - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+    - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION    
     # Set up plugin information.
     - plugin_slug=$(basename $(pwd))
     - plugin_dir=$WP_DEVELOP_DIR/src/wp-content/themes/$plugin_slug
@@ -79,6 +79,8 @@ before_script:
 script:
     # Search theme for PHP syntax errors.
     - find . \( -name '*.php' \) -exec php -lf {} \;
+    # Run phpunit
+    - phpunit
     # Run the theme through JSHint
     # - jshint .
     # Run the theme through JavaScript Code Style checker
@@ -92,5 +94,4 @@ script:
     # -n flag: Do not print warnings (shortcut for --warning-severity=0)
     # --standard: Use WordPress as the standard.
     # --extensions: Only sniff PHP files.
-    - $WP_DEVELOP_DIR/php-codesniffer/scripts/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php --ignore=*/tests/*
-    - phpunit
+    - $WP_DEVELOP_DIR/php-codesniffer/scripts/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php --ignore=*/tests/*    
