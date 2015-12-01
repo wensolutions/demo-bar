@@ -73,7 +73,7 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		function register_post_types(){
+		function register_post_types() {
 			$labels = array(
 				'name'                  => __( 'Sites', 'demo-bar' ),
 				'singular_name'         => __( 'Site', 'demo-bar' ),
@@ -98,7 +98,7 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 				'public'    => true,
 				'labels'    => $labels,
 				'menu_icon' => 'dashicons-admin-site',
-				'supports'  => array( 'title', 'thumbnail' )
+				'supports'  => array( 'title', 'thumbnail' ),
 			);
 			$args = apply_filters( 'demo_bar_register_post_type_dbsite', $args );
 			register_post_type( 'dbsite', $args );
