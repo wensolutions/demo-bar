@@ -93,3 +93,4 @@ script:
     # --standard: Use WordPress as the standard.
     # --extensions: Only sniff PHP files.
     - $WP_DEVELOP_DIR/php-codesniffer/scripts/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php --ignore=*/tests/*
+    - phpunit
