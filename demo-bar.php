@@ -62,13 +62,10 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		function init(){
-
+		function init() {
 			// Load plugin text domain.
 			load_plugin_textdomain( 'demo-bar', false, basename( dirname( __FILE__ ) ) . '/languages' );
-
 		}
-
 	}
 }
 
