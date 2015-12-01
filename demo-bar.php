@@ -11,8 +11,9 @@
  * Text Domain: demo-bar
  */
 
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
 if ( ! class_exists( 'Demo_Bar' ) ) {
