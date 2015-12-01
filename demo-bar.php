@@ -14,3 +14,19 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
+if ( ! class_exists( 'Demo_Bar' ) ) {
+
+	/**
+	 * Main Class.
+	 */
+	class Demo_Bar {
+
+		var $demo_bar_options;
+
+		function __construct() {
+		}
+	}
+}
+
+$demo_bar_obj = new Demo_Bar();
