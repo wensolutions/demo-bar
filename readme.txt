@@ -12,7 +12,7 @@ Simple plugin for displaying demo
 
 == Description ==
 
-This plugin helps add demo bar for displaying your different theme demos.
+This plugin helps to add demo bar for displaying your different theme demos.
 
 == Installation ==
 
