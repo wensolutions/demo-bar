@@ -1,7 +1,7 @@
 <?php
 /**
  * Class to test post types.
- * @package WooCommerce\Tests\
+ * @package DemoBar\Tests\
  * @since 1.0.0
  */
 
