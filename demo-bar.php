@@ -9,6 +9,8 @@
  * Requires at least: 4.1
  * Tested up to: 4.4
  * Text Domain: demo-bar
+ *
+ * @package Demo_Bar
  */
 
 // Exit if accessed directly.
@@ -23,8 +25,20 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 	 */
 	class Demo_Bar {
 
+		/**
+		 * Plugin options.
+		 *
+		 * @since 1.0.0
+		 * @access private
+		 * @var array
+		 */
 		var $demo_bar_options;
 
+		/**
+		 * Constructor.
+		 *
+		 * @since 1.0.0
+		 */
 		function __construct() {
 		}
 	}
