@@ -18,6 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Common constants.
+ */
+define( 'DEMO_BAR_VERSION', '1.0.0' );
+define( 'DEMO_BAR_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
+define( 'DEMO_BAR_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
+
+
 if ( ! class_exists( 'Demo_Bar' ) ) {
 
 	/**
@@ -40,7 +48,27 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 		 * @since 1.0.0
 		 */
 		function __construct() {
+
+			// Load plugin options.
+			$this->demo_bar_options = get_option( 'demo_bar_options' );
+
+			// Executes when init hook is fired.
+			add_action( 'init', array( $this, 'init' ) );
+
 		}
+
+		/**
+		 * Plugin init.
+		 *
+		 * @since 1.0.0
+		 */
+		function init(){
+
+			// Load plugin text domain.
+			load_plugin_textdomain( 'demo-bar', false, basename( dirname( __FILE__ ) ) . '/languages' );
+
+		}
+
 	}
 }
 
