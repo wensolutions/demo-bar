@@ -10,7 +10,7 @@
  * Tested up to: 4.4
  * Text Domain: demo-bar
  *
- * @package Demo_Bar
+ * @package DemoBar
  */
 
 // Exit if accessed directly.
@@ -18,29 +18,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Common constants.
- */
-define( 'DEMO_BAR_VERSION', '1.0.0' );
-define( 'DEMO_BAR_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
-define( 'DEMO_BAR_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
-
-
-if ( ! class_exists( 'Demo_Bar' ) ) {
+if ( ! class_exists( 'DemoBar' ) ) :
 
 	/**
 	 * Main Class.
 	 */
-	class Demo_Bar {
+	class DemoBar {
 
 		/**
-		 * Plugin options.
+		 * Plugin version.
+		 *
+		 * @var string
+		 * @since 1.0.0
+		 */
+		public $version = '1.0.0';
+
+		/**
+		 * Plugin instance.
+		 *
+		 * @var DemoBar The single instance of the class.
+		 * @since 1.0.0
+		 */
+		protected static $_instance = null;
+
+
+		/**
+		 * Main DemoBar Instance.
+		 *
+		 * Ensures only one instance of DemoBar is loaded or can be loaded.
 		 *
 		 * @since 1.0.0
-		 * @access private
-		 * @var array
+		 * @static
+		 * @see DB()
+		 * @return DemoBar - Main instance.
 		 */
-		var $demo_bar_options;
+		public static function instance() {
+			if ( is_null( self::$_instance ) ) {
+				self::$_instance = new self();
+			}
+			return self::$_instance;
+		}
+
 
 		/**
 		 * Constructor.
@@ -48,28 +66,82 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 		 * @since 1.0.0
 		 */
 		function __construct() {
-			// Load plugin options.
-			$this->demo_bar_options = get_option( 'demo_bar_options' );
+			$this->define_constants();
+			$this->includes();
+			$this->init_hooks();
 
-			// Executes when init hook is fired.
-			add_action( 'init', array( $this, 'init' ) );
+			do_action( 'demobar_loaded' );
+		}
 
-			// Add meta box.
-			add_action( 'add_meta_boxes', array( $this, 'add_site_meta_box' ) );
+		/**
+		 * Define Constants.
+		 *
+		 * @since 1.0.0
+		 * @access private
+		 */
+		private function define_constants() {
+			$this->define( 'DEMOBAR_PLUGIN_FILE', __FILE__ );
+			$this->define( 'DEMOBAR_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+			$this->define( 'DEMOBAR_VERSION', $this->version );
+		}
 
-			// Save meta box.
-			add_action( 'save_post', array( $this, 'save_site_settings_meta_box' ), 10, 3 );
+		/**
+		 * Define constant if not already set.
+		 *
+		 * @since 1.0.0
+		 * @access private
+		 *
+		 * @param  string $name
+		 * @param  string|bool $value
+		 */
+		private function define( $name, $value ) {
+			if ( ! defined( $name ) ) {
+				define( $name, $value );
+			}
+		}
 
-			// Hide publishing actions.
-			add_action( 'admin_head-post.php', array( $this, 'hide_publishing_actions' ) );
-			add_action( 'admin_head-post-new.php', array( $this, 'hide_publishing_actions' ) );
+		/**
+		 * Include required core files used in admin and on the frontend.
+		 *
+		 * @since 1.0.0
+		 */
+		public function includes() {
+			include_once( 'includes/class-demobar-post-types.php' );
+			include_once( 'includes/class-demobar-install.php' );
 
-			// Customize Row actions.
-			add_filter( 'post_row_actions', array( $this, 'customize_row_actions' ), 10, 2 );
+			if ( $this->is_request( 'admin' ) ) {
+				require_once( 'includes/admin/class-demobar-admin.php' );
+			}
+		}
 
-			// Add Admin column.
-			add_filter( 'manage_dbsite_posts_columns', array( $this, 'custom_column_head' ) );
-			add_action( 'manage_dbsite_posts_custom_column', array( $this, 'custom_column_content' ), 10, 2 );
+		/**
+		 * What type of request is this?
+		 * string $type ajax, frontend or admin.
+		 *
+		 * @return bool
+		 */
+		private function is_request( $type ) {
+			switch ( $type ) {
+				case 'admin' :
+					return is_admin();
+				case 'ajax' :
+					return defined( 'DOING_AJAX' );
+				case 'cron' :
+					return defined( 'DOING_CRON' );
+				case 'frontend' :
+					return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
+			}
+		}
+
+		/**
+		 * Hook into actions and filters.
+		 *
+		 * @since 1.0.0
+		 * @access private
+		 */
+		private function init_hooks() {
+			register_activation_hook( __FILE__, array( 'DemoBar_Install', 'install' ) );
+			add_action( 'init', array( $this, 'init' ), 0 );
 		}
 
 		/**
@@ -80,219 +152,22 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 		function init() {
 			// Load plugin text domain.
 			load_plugin_textdomain( 'demo-bar', false, basename( dirname( __FILE__ ) ) . '/languages' );
-
-			// Register post types.
-			$this->register_post_types();
 		}
 
-		/**
-		 * Add meta box.
-		 *
-		 * @since 1.0.0
-		 */
-		function add_site_meta_box() {
-			add_meta_box(
-				'dbsite-settings',
-				esc_html__( 'Site Info', 'demo-bar' ),
-				array( $this, 'render_site_settings_metabox' ),
-				'dbsite'
-			);
-		}
+}
+endif;
 
-		/**
-		 * Render site settings metabox.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param WP_Post $post    WP_Post object.
-		 * @param array   $metabox Metabox arguments.
-		 */
-		function render_site_settings_metabox( $post, $metabox ) {
-			// Meta box nonce for verification.
-			wp_nonce_field( basename( __FILE__ ), 'demo_bar_site_settings_meta_box_nonce' );
-
-			$demo_bar_site_url     = get_post_meta( $post->ID, 'demo_bar_site_url', true );
-			$demo_bar_download_url = get_post_meta( $post->ID, 'demo_bar_download_url', true );
-			?>
-			<p>
-				<label for="demo_bar_site_url"><?php echo esc_html__( 'Site URL', 'demo-bar' ); ?><br /><input type="text" value="<?php echo esc_url( $demo_bar_site_url ); ?>" class="regular-text" name="demo_bar_site_url" id="demo_bar_site_url" /></label>
-			</p>
-			<p>
-				<label for="demo_bar_download_url"><?php echo esc_html__( 'Download URL', 'demo-bar' ); ?><br /><input type="text" value="<?php echo esc_url( $demo_bar_download_url ); ?>" class="regular-text" name="demo_bar_download_url" id="demo_bar_download_url" /></label>
-			</p>
-			<?php
-		}
-
-		/**
-		 * Save site settings meta box.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param int     $post_ID Post ID.
-		 * @param WP_Post $post    Post object.
-		 * @param bool    $update  Whether this is an existing post being updated or not.
-		 */
-		function save_site_settings_meta_box( $post_ID, $post, $update ) {
-			// Verify nonce.
-			if ( ! isset( $_POST['demo_bar_site_settings_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['demo_bar_site_settings_meta_box_nonce'], basename( __FILE__ ) ) ) {
-				return;
-			}
-			// Bail if auto save or revision.
-			if ( defined( 'DOING_AUTOSAVE' ) || is_int( wp_is_post_revision( $post ) ) || is_int( wp_is_post_autosave( $post ) ) ) {
-				return;
-			}
-			// Check the post being saved == the $post_ID to prevent triggering this call for other save_post events.
-			if ( empty( $_POST['post_ID'] ) || absint( $_POST['post_ID'] ) !== $post_ID ) {
-				return;
-			}
-			// Check permission.
-			if ( 'page' === $_POST['post_type'] ) {
-				if ( ! current_user_can( 'edit_page', $post_ID ) ) {
-					return;
-				}
-			} else if ( ! current_user_can( 'edit_post', $post_ID ) ) {
-				return;
-			}
-			$site_settings_fields = array(
-				'demo_bar_site_url',
-				'demo_bar_download_url',
-			);
-			foreach ( $site_settings_fields as $key ) {
-				if ( isset( $_POST[ $key ] ) ) {
-					$post_value = $_POST[ $key ];
-					if ( empty( $post_value ) ) {
-						delete_post_meta( $post_ID, $key );
-					} else {
-						update_post_meta( $post_ID, $key, esc_url_raw( $post_value ) );
-					}
-				}
-			} // End foreach loop.
-		}
-
-		/**
-		 * Register post types.
-		 *
-		 * @since 1.0.0
-		 */
-		function register_post_types() {
-			$labels = array(
-				'name'                  => __( 'Sites', 'demo-bar' ),
-				'singular_name'         => __( 'Site', 'demo-bar' ),
-				'menu_name'             => _x( 'Sites', 'Admin menu name', 'demo-bar' ),
-				'add_new'               => __( 'Add Site', 'demo-bar' ),
-				'add_new_item'          => __( 'Add New Site', 'demo-bar' ),
-				'edit'                  => __( 'Edit', 'demo-bar' ),
-				'edit_item'             => __( 'Edit Site', 'demo-bar' ),
-				'new_item'              => __( 'New Site', 'demo-bar' ),
-				'view'                  => __( 'View Site', 'demo-bar' ),
-				'view_item'             => __( 'View Site', 'demo-bar' ),
-				'search_items'          => __( 'Search Sites', 'demo-bar' ),
-				'not_found'             => __( 'No Sites found', 'demo-bar' ),
-				'not_found_in_trash'    => __( 'No Sites found in trash', 'demo-bar' ),
-				'parent'                => __( 'Parent Site', 'demo-bar' ),
-				'featured_image'        => __( 'Site Image', 'demo-bar' ),
-				'set_featured_image'    => __( 'Set site image', 'demo-bar' ),
-				'remove_featured_image' => __( 'Remove site image', 'demo-bar' ),
-				'use_featured_image'    => __( 'Use as site image', 'demo-bar' ),
-			);
-			$args = array(
-				'public'             => true,
-				'labels'             => $labels,
-				'public'             => false,
-				'publicly_queryable' => false,
-				'show_ui'            => true,
-				'show_in_menu'       => true,
-				'query_var'          => false,
-				'has_archive'        => false,
-				'hierarchical'       => false,
-				'menu_icon'          => 'dashicons-admin-site',
-				'supports'           => array( 'title', 'thumbnail' ),
-			);
-			$args = apply_filters( 'demo_bar_register_post_type_dbsite', $args );
-			register_post_type( 'dbsite', $args );
-		}
-
-		/**
-		 * Hide publishing actions.
-		 *
-		 * @since 1.0.0
-		 */
-		function hide_publishing_actions() {
-			global $post;
-			if ( 'dbsite' !== $post->post_type ) {
-				return;
-			}
-			?>
-			<style type="text/css">
-				#misc-publishing-actions,#minor-publishing-actions{
-					display:none;
-				}
-			</style>
-			<?php
-			return;
-		}
-
-		/**
-		 * Customize row actions.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param array   $actions An array of row action links.
-		 * @param WP_Post $post    The post object.
-		 */
-		function customize_row_actions( $actions, $post ) {
-			if ( 'dbsite' === $post->post_type ) {
-				unset( $actions['inline hide-if-no-js'] );
-			}
-			return $actions;
-		}
-
-		/**
-		 * Customize column names.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param array $columns An array of column names.
-		 */
-		function custom_column_head( $columns ) {
-			$new_columns['cb']           = '<input type="checkbox" />';
-			$new_columns['title']        = $columns['title'];
-			$new_columns['thumb']        = _x( 'Image', 'column name', 'demo-bar' );
-			$new_columns['site_url']     = _x( 'Site URL', 'column name', 'demo-bar' );
-			$new_columns['download_url'] = _x( 'Download URL',  'column name', 'demo-bar' );
-			$new_columns['date']         = $columns['date'];
-			return $new_columns;
-		}
-
-		/**
-		 * Customize column content.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string $column_name The name of the column to display.
-		 * @param int    $post_ID     The current post ID.
-		 */
-		function custom_column_content( $column_name, $post_ID ) {
-			switch ( $column_name ) {
-				case 'site_url':
-					echo esc_url( get_post_meta( $post_ID, 'demo_bar_site_url', true ) );
-					break;
-				case 'download_url':
-					echo esc_url( get_post_meta( $post_ID, 'demo_bar_download_url', true ) );
-					break;
-				case 'thumb':
-					$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_ID ), 'thumbnail' );
-					if ( ! empty( $image ) ) {
-						echo '<a href="' . esc_url( get_edit_post_link( $post_ID ) ) . '">';
-						echo '<img src="' . esc_url( $image[0] ) . '" width="50"/>';
-						echo '</a>';
-					}
-					break;
-				default:
-					break;
-			}
-		}
-	}
+/**
+ * Main instance of DemoBar.
+ *
+ * Returns the main instance of DBR to prevent the need to use globals.
+ *
+ * @since  1.0.0
+ * @return DemoBar
+ */
+function DBR() {
+	return DemoBar::instance();
 }
 
-$demo_bar_obj = new Demo_Bar();
+// Global for backwards compatibility.
+$GLOBALS['demobar'] = DBR();
