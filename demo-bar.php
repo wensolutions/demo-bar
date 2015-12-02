@@ -63,6 +63,9 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 			// Hide publishing actions.
 			add_action( 'admin_head-post.php', array( $this, 'hide_publishing_actions' ) );
 			add_action( 'admin_head-post-new.php', array( $this, 'hide_publishing_actions' ) );
+
+			// Customize Row actions.
+			add_filter( 'post_row_actions', array( $this, 'customize_row_actions' ), 10, 2 );
 		}
 
 		/**
@@ -189,10 +192,17 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 				'use_featured_image'    => __( 'Use as site image', 'demo-bar' ),
 			);
 			$args = array(
-				'public'    => true,
-				'labels'    => $labels,
-				'menu_icon' => 'dashicons-admin-site',
-				'supports'  => array( 'title', 'thumbnail' ),
+				'public'             => true,
+				'labels'             => $labels,
+				'public'             => false,
+				'publicly_queryable' => false,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'query_var'          => false,
+				'has_archive'        => false,
+				'hierarchical'       => false,
+				'menu_icon'          => 'dashicons-admin-site',
+				'supports'           => array( 'title', 'thumbnail' ),
 			);
 			$args = apply_filters( 'demo_bar_register_post_type_dbsite', $args );
 			register_post_type( 'dbsite', $args );
@@ -216,6 +226,21 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 			</style>
 			<?php
 			return;
+		}
+
+		/**
+		 * Customize row actions.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array   $actions An array of row action links.
+		 * @param WP_Post $post    The post object.
+		 */
+		function customize_row_actions( $actions, $post ) {
+			if ( 'dbsite' === $post->post_type ) {
+				unset( $actions['inline hide-if-no-js'] );
+			}
+			return $actions;
 		}
 	}
 }
