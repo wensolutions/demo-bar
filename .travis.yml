@@ -33,6 +33,7 @@ before_script:
   - scripts/phpcs --config-set installed_paths ../wordpress-coding-standards
   # After CodeSniffer install you should refresh your path.
   - phpenv rehash
+  - cd ..
 
 
 script: 
