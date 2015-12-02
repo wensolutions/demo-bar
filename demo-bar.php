@@ -66,6 +66,10 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 
 			// Customize Row actions.
 			add_filter( 'post_row_actions', array( $this, 'customize_row_actions' ), 10, 2 );
+
+			// Add Admin column.
+			add_filter( 'manage_dbsite_posts_columns', array( $this, 'custom_column_head' ) );
+			add_action( 'manage_dbsite_posts_custom_column', array( $this, 'custom_column_content' ), 10, 2 );
 		}
 
 		/**
@@ -241,6 +245,43 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 				unset( $actions['inline hide-if-no-js'] );
 			}
 			return $actions;
+		}
+
+		/**
+		 * Customize column names.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $columns An array of column names.
+		 */
+		function custom_column_head( $columns ) {
+			$new_columns['cb']           = '<input type="checkbox" />';
+			$new_columns['title']        = $columns['title'];
+			$new_columns['site_url']     = _x( 'Site URL', 'column name', 'demo-bar' );
+			$new_columns['download_url'] = _x( 'Download URL',  'column name', 'demo-bar' );
+			$new_columns['date']         = $columns['date'];
+			return $new_columns;
+		}
+
+		/**
+		 * Customize column content.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $column_name The name of the column to display.
+		 * @param int    $post_ID     The current post ID.
+		 */
+		function custom_column_content( $column_name, $post_ID ) {
+			switch ( $column_name ) {
+				case 'site_url':
+					echo esc_url( get_post_meta( $post_ID, 'demo_bar_site_url', true ) );
+					break;
+				case 'download_url':
+					echo esc_url( get_post_meta( $post_ID, 'demo_bar_download_url', true ) );
+					break;
+				default:
+					break;
+			}
 		}
 	}
 }
