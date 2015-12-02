@@ -53,6 +53,9 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 
 			// Executes when init hook is fired.
 			add_action( 'init', array( $this, 'init' ) );
+
+			// Add meta box.
+			add_action( 'add_meta_boxes', array( $this, 'add_site_meta_box' ) );
 		}
 
 		/**
@@ -66,6 +69,45 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 
 			// Register post types.
 			$this->register_post_types();
+		}
+
+		/**
+		 * Add meta box.
+		 *
+		 * @since 1.0.0
+		 */
+		function add_site_meta_box() {
+			add_meta_box(
+				'dbsite-settings',
+				esc_html__( 'Site Info', 'demo-bar' ),
+				array( $this, 'render_site_settings_metabox' ),
+				'dbsite'
+			);
+		}
+
+		/**
+		 * Render site settings metabox.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Post $post    WP_Post object.
+		 * @param array   $metabox Metabox arguments.
+		 */
+		function render_site_settings_metabox( $post, $metabox ) {
+			// Meta box nonce for verification.
+			wp_nonce_field( basename( __FILE__ ), 'demo_bar_site_settings_meta_box_nonce' );
+
+			$demo_bar_site_url     = get_post_meta( $post->ID, 'demo_bar_site_url', true );
+			$demo_bar_download_url = get_post_meta( $post->ID, 'demo_bar_download_url', true );
+			?>
+			<p>
+				<label for="demo_bar_site_url"><?php echo esc_html__( 'Site URL', 'demo-bar' ); ?><br /><input type="text" value="<?php echo esc_url( $demo_bar_site_url ); ?>" class="regular-text" name="demo_bar_site_url" id="demo_bar_site_url" /></label>
+			</p>
+			<p>
+				<label for="demo_bar_download_url"><?php echo esc_html__( 'Download URL', 'demo-bar' ); ?><br /><input type="text" value="<?php echo esc_url( $demo_bar_download_url ); ?>" class="regular-text" name="demo_bar_download_url" id="demo_bar_download_url" /></label>
+			</p>
+			<?php
+
 		}
 
 		/**
