@@ -59,6 +59,10 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 
 			// Save meta box.
 			add_action( 'save_post', array( $this, 'save_site_settings_meta_box' ), 10, 3 );
+
+			// Hide publishing actions.
+			add_action( 'admin_head-post.php', array( $this, 'hide_publishing_actions' ) );
+			add_action( 'admin_head-post-new.php', array( $this, 'hide_publishing_actions' ) );
 		}
 
 		/**
@@ -192,6 +196,26 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 			);
 			$args = apply_filters( 'demo_bar_register_post_type_dbsite', $args );
 			register_post_type( 'dbsite', $args );
+		}
+
+		/**
+		 * Hide publishing actions.
+		 *
+		 * @since 1.0.0
+		 */
+		function hide_publishing_actions() {
+			global $post;
+			if ( 'dbsite' !== $post->post_type ) {
+				return;
+			}
+			?>
+			<style type="text/css">
+				#misc-publishing-actions,#minor-publishing-actions{
+					display:none;
+				}
+			</style>
+			<?php
+			return;
 		}
 	}
 }
