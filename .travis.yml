@@ -34,6 +34,9 @@ before_script:
   # After CodeSniffer install you should refresh your path.
   - phpenv rehash
   - cd ..
+  - pwd
+  - whereis phpcs
+  - phpcs -i
 
 
 script: 
