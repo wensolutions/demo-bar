@@ -21,7 +21,7 @@ matrix:
     env: WP_VERSION=latest WP_MULTISITE=0
 
 before_script:
-  - export WP_DEVELOP_DIR=/tmp/wordpress-tests-lib
+  - export WP_DEVELOP_DIR=/tmp/wordpress
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
   # Install CodeSniffer for WordPress Coding Standards checks.
   - mkdir php-codesniffer && curl -L https://github.com/squizlabs/PHP_CodeSniffer/archive/master.tar.gz | tar xz --strip-components=1 -C php-codesniffer
@@ -33,11 +33,6 @@ before_script:
   - scripts/phpcs --config-set installed_paths ../wordpress-coding-standards
   # After CodeSniffer install you should refresh your path.
   - phpenv rehash
-  - cd ..
-  - pwd
-  - whereis phpcs
-  - phpcs -i
-
 
 script: 
   - phpunit -c phpunit.xml
