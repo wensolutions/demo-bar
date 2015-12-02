@@ -257,6 +257,7 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 		function custom_column_head( $columns ) {
 			$new_columns['cb']           = '<input type="checkbox" />';
 			$new_columns['title']        = $columns['title'];
+			$new_columns['thumb']        = _x( 'Image', 'column name', 'demo-bar' );
 			$new_columns['site_url']     = _x( 'Site URL', 'column name', 'demo-bar' );
 			$new_columns['download_url'] = _x( 'Download URL',  'column name', 'demo-bar' );
 			$new_columns['date']         = $columns['date'];
@@ -278,6 +279,14 @@ if ( ! class_exists( 'Demo_Bar' ) ) {
 					break;
 				case 'download_url':
 					echo esc_url( get_post_meta( $post_ID, 'demo_bar_download_url', true ) );
+					break;
+				case 'thumb':
+					$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_ID ), 'thumbnail' );
+					if ( ! empty( $image ) ) {
+						echo '<a href="' . esc_url( get_edit_post_link( $post_ID ) ) . '">';
+						echo '<img src="' . esc_url( $image[0] ) . '" width="50"/>';
+						echo '</a>';
+					}
 					break;
 				default:
 					break;
