@@ -33,19 +33,19 @@ class WC_Unit_Tests_Bootstrap {
 		$this->wp_tests_dir = getenv( 'WP_TESTS_DIR' ) ? getenv( 'WP_TESTS_DIR' ) : '/tmp/wordpress-tests-lib';
 
 		// load test function so tests_add_filter() is available
-		require_once( $this->wp_tests_dir . '/includes/functions.php' );
+		// require_once( $this->wp_tests_dir . '/includes/functions.php' );
 
 		// load WC
-		tests_add_filter( 'muplugins_loaded', array( $this, 'load_wc' ) );
+		// tests_add_filter( 'muplugins_loaded', array( $this, 'load_wc' ) );
 
 		// install WC
-		tests_add_filter( 'setup_theme', array( $this, 'install_wc' ) );
+		// tests_add_filter( 'setup_theme', array( $this, 'install_wc' ) );
 
 		// load the WP testing environment
-		require_once( $this->wp_tests_dir . '/includes/bootstrap.php' );
+		// require_once( $this->wp_tests_dir . '/includes/bootstrap.php' );
 
 		// load WC testing framework
-		$this->includes();
+		// $this->includes();
 	}
 
 	/**

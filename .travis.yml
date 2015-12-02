@@ -18,7 +18,7 @@ env:
 matrix:
   include:
   - php: 5.3
-    env: WP_VERSION=latest WP_MULTISITE=1
+    env: WP_VERSION=latest WP_MULTISITE=0
 
 before_script:
   - bash tests/bin/install.sh wordpress_test root '' localhost $WP_VERSION
