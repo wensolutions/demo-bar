@@ -21,7 +21,7 @@ class DemoBar_Admin_Post_Types {
 	 * Constructor.
 	 */
 	public function __construct() {
-		// Meta-Box Class
+		// Load Meta Box Class.
 		require_once( 'class-demobar-admin-meta-boxes.php' );
 
 		// Add Admin column.

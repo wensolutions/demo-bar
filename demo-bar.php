@@ -89,8 +89,8 @@ if ( ! class_exists( 'DemoBar' ) ) :
 		 * @since 1.0.0
 		 * @access private
 		 *
-		 * @param  string $name
-		 * @param  string|bool $value
+		 * @param string      $name Define key.
+		 * @param string|bool $value Define value.
 		 */
 		private function define( $name, $value ) {
 			if ( ! defined( $name ) ) {
@@ -117,6 +117,9 @@ if ( ! class_exists( 'DemoBar' ) ) :
 		 * What type of request is this?
 		 * string $type ajax, frontend or admin.
 		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $type Request type.
 		 * @return bool
 		 */
 		private function is_request( $type ) {
@@ -152,7 +155,6 @@ if ( ! class_exists( 'DemoBar' ) ) :
 			// Load plugin text domain.
 			load_plugin_textdomain( 'demo-bar', false, basename( dirname( __FILE__ ) ) . '/languages' );
 		}
-
 }
 endif;
 

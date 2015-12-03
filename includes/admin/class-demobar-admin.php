@@ -9,8 +9,9 @@
  * @version     2.3
  */
 
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
 /**
@@ -23,13 +24,13 @@ class DemoBar_Admin {
 	public function __construct() {
 		add_action( 'init', array( $this, 'includes' ) );
 	}
+
 	/**
 	 * Include any classes we need within admin.
 	 */
 	public function includes() {
 		require_once( 'class-demobar-admin-post-types.php' );
 	}
-
 }
 
 return new DemoBar_Admin();
