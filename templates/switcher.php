@@ -1,0 +1,1 @@
+I am switcher template.

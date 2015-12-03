@@ -48,8 +48,6 @@ if ( ! class_exists( 'DemoBar' ) ) :
 		 * Ensures only one instance of DemoBar is loaded or can be loaded.
 		 *
 		 * @since 1.0.0
-		 * @static
-		 * @see DB()
 		 * @return DemoBar - Main instance.
 		 */
 		public static function instance() {
@@ -108,6 +106,7 @@ if ( ! class_exists( 'DemoBar' ) ) :
 		public function includes() {
 			include_once( 'includes/class-demobar-post-types.php' );
 			include_once( 'includes/class-demobar-install.php' );
+			include_once( 'includes/class-demobar-switcher.php' );
 
 			if ( $this->is_request( 'admin' ) ) {
 				require_once( 'includes/admin/class-demobar-admin.php' );
