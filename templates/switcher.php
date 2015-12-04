@@ -44,13 +44,21 @@
 ?>
 <body>
 	<div id="db-switcher">
-		<a href="#"><?php _e( 'Select', 'demo-bar' ); ?></a>
-		<?php if ( ! empty( $sites ) ) : ?>
-			<?php foreach ( $sites as $site ) : ?>
-				<a href="<?php echo esc_url( get_permalink() . '?theme='. esc_attr( $site['slug'] ) ); ?>"><?php echo esc_html( $site['title'] ); ?></a>
-			<?php endforeach; ?>
-		<?php endif ?>
-		<a href="<?php echo esc_url( $sites[$current_theme]['site_url'] ); ?>" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
+		<div id="dropdown">
+			<?php _e( 'Select', 'demo-bar' ); ?>
+			<?php if ( ! empty( $sites ) ) : ?>
+				<ul>
+				<?php foreach ( $sites as $site ) : ?>
+					<li>
+						<a href="<?php echo esc_url( get_permalink() . '?theme='. esc_attr( $site['slug'] ) ); ?>"><?php echo esc_html( $site['title'] ); ?></a>
+					</li>
+				<?php endforeach; ?>
+				</ul>
+			<?php endif ?>
+		</div> <!-- #dropdown -->
+		<div id="buttons">
+			<a href="<?php echo esc_url( $sites[$current_theme]['site_url'] ); ?>" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
+		</div><!-- #buttons -->
 	</div>
 	<iframe id="frame-area" src="<?php echo esc_url( $sites[$current_theme]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
 </body>
