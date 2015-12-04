@@ -23,8 +23,10 @@ class DemoBar_Switcher {
 
 	/**
 	 * Load custom template.
+	 *
+	 * @since string $template Template.
 	 */
-	public function custom_template() {
+	public function custom_template( $template ) {
 		if ( is_page( array( 2, 'sample-page' ) )  ) {
 			$new_template = plugin_dir_path( DEMOBAR_PLUGIN_FILE ) . 'templates/switcher.php';
 			if ( $new_template ) {

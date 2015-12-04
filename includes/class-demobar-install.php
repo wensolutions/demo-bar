@@ -14,7 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class DemoBar_Install {
 
-
 	/**
 	 * Install.
 	 */
