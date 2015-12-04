@@ -14,11 +14,12 @@
 	<link rel="stylesheet" href="<?php echo DEMOBAR_PLUGIN_URL; ?>/css/front.css">
 	<script src="<?php echo esc_url( site_url() ); ?>/wp-includes/js/jquery/jquery.js"></script>
 	<script src="<?php echo esc_url( site_url() ); ?>/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+	<script src="<?php echo DEMOBAR_PLUGIN_URL; ?>/js/front.js"></script>
 </head>
 <body>
 	<div id="db-switcher">
-		<a href="#">Select theme</a>
-		<a href="#" class="btn btn-close">Close</a>
+		<a href="#"><?php _e( 'Select', 'demo-bar' ); ?></a>
+		<a href="#" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
 	</div>
 </body>
 </html>

@@ -24,7 +24,9 @@ class DemoBar_Switcher {
 	/**
 	 * Load custom template.
 	 *
-	 * @since string $template Template.
+	 * @since 1.0.0
+	 *
+	 * @param string $template Template.
 	 */
 	public function custom_template( $template ) {
 		if ( is_page( array( 2, 'sample-page' ) )  ) {
