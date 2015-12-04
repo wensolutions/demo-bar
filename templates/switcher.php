@@ -29,7 +29,7 @@
 <?php
 	$current_theme = '';
 	$sites = DemoBar_Switcher::get_sites();
-	$site_param = sanitize_key( $_REQUEST['theme'] );
+	$site_param = ( isset( $_REQUEST['theme'] ) ) ? sanitize_key( $_REQUEST['theme'] ) : '';
 	$valid_key = false;
 	if ( ! empty( $sites ) ) {
 		$valid_key = demo_bar_find_by_key( $sites, 'slug', $site_param );
