@@ -50,7 +50,7 @@
 				<a href="<?php echo esc_url( get_permalink() . '?theme='. esc_attr( $site['slug'] ) ); ?>"><?php echo esc_html( $site['title'] ); ?></a>
 			<?php endforeach; ?>
 		<?php endif ?>
-		<a href="#" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
+		<a href="<?php echo esc_url( $sites[$current_theme]['site_url'] ); ?>" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
 	</div>
 	<iframe id="frame-area" src="<?php echo esc_url( $sites[$current_theme]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
 </body>
