@@ -15,10 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 class DemoBar_Switcher {
 
 	/**
-	 * Constructor.
+	 * Init.
+	 *
+	 * @since 1.0.0
 	 */
-	public function __construct() {
-		add_filter( 'template_include', array( $this, 'custom_template' ), 99 );
+	public static function init() {
+		add_filter( 'template_include', array( __CLASS__, 'custom_template' ), 99 );
 	}
 
 	/**
@@ -28,7 +30,7 @@ class DemoBar_Switcher {
 	 *
 	 * @param string $template Template.
 	 */
-	public function custom_template( $template ) {
+	public static function custom_template( $template ) {
 		if ( is_page( array( 2, 'sample-page' ) )  ) {
 			$new_template = plugin_dir_path( DEMOBAR_PLUGIN_FILE ) . 'templates/switcher.php';
 			if ( $new_template ) {
@@ -37,6 +39,33 @@ class DemoBar_Switcher {
 		}
 		return $template;
 	}
+
+	/**
+	 * Fetch site list.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function get_sites() {
+		$output = array();
+		$qargs = array(
+			'post_type'      => 'dbsite',
+			'no_found_rows'  => true,
+			'posts_per_page' => -1,
+		);
+		$all_posts = get_posts( $qargs );
+		if ( $all_posts ) {
+			foreach ( $all_posts as $p ) {
+				$item = array();
+				$item['ID']           = $p->ID;
+				$item['title']        = apply_filters( 'the_title', $p->post_title );
+				$item['slug']         = $p->post_name;
+				$item['site_url']     = get_post_meta( $p->ID, 'demo_bar_site_url', true );
+				$item['download_url'] = get_post_meta( $p->ID, 'demo_bar_download_url', true );
+				$output[ $p->ID ] = $item;
+			}
+		}
+		return $output;
+	}
 }
 
-new DemoBar_Switcher();
+DemoBar_Switcher::init();
