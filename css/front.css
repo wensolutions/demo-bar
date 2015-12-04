@@ -1,0 +1,23 @@
+* {
+	margin: 0;
+}
+html {
+	margin: 0 !important;
+}
+body {
+	overflow: hidden;
+}
+#db-switcher {
+	border-bottom: 1px solid #353535;
+	height: 59px;
+	position: fixed;
+	width: 100%;
+	z-index: 99999;
+}
+#frame-area {
+	position: absolute;
+	margin: 0 auto;
+	width: 100%;
+	padding-top: 60px;
+	height: 100%;
+}

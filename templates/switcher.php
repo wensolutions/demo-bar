@@ -52,6 +52,6 @@
 		<?php endif ?>
 		<a href="#" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
 	</div>
-	<iframe id="iframe" src="<?php echo esc_url( $sites[$current_theme]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
+	<iframe id="frame-area" src="<?php echo esc_url( $sites[$current_theme]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
 </body>
 </html>
