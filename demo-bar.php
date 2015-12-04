@@ -81,6 +81,8 @@ if ( ! class_exists( 'DemoBar' ) ) :
 			$this->define( 'DEMOBAR_PLUGIN_FILE', __FILE__ );
 			$this->define( 'DEMOBAR_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 			$this->define( 'DEMOBAR_VERSION', $this->version );
+			$this->define( 'DEMOBAR_PLUGIN_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
+			$this->define( 'DEMOBAR_PLUGIN_URI', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
 		}
 
 		/**
