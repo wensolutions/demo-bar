@@ -31,10 +31,13 @@ class DemoBar_Switcher {
 	 * @param string $template Template.
 	 */
 	public static function custom_template( $template ) {
-		if ( is_page( array( 2, 'sample-page' ) )  ) {
-			$new_template = plugin_dir_path( DEMOBAR_PLUGIN_FILE ) . 'templates/switcher.php';
-			if ( $new_template ) {
-				return $new_template;
+		$demobar_options = get_option( 'demobar_options' );
+		if ( isset( $demobar_options['demo_page'] ) && absint( $demobar_options['demo_page'] ) > 0 ) {
+			if ( is_page( absint( $demobar_options['demo_page'] ) ) ) {
+				$new_template = plugin_dir_path( DEMOBAR_PLUGIN_FILE ) . 'templates/switcher.php';
+				if ( $new_template ) {
+					return $new_template;
+				}
 			}
 		}
 		return $template;

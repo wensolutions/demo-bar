@@ -52,8 +52,16 @@ if ( false !== $valid_key ) {
 			<?php if ( ! empty( $sites ) ) : ?>
 				<ul>
 				<?php foreach ( $sites as $site ) : ?>
+					<?php
+						$link = add_query_arg(
+							array(
+								'demo' => esc_attr( $site['slug'] ),
+							),
+							get_permalink()
+						);
+					?>
 					<li>
-						<a href="<?php echo esc_url( get_permalink() . '?demo='. esc_attr( $site['slug'] ) ); ?>"><?php echo esc_html( $site['title'] ); ?></a>
+						<a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $site['title'] ); ?></a>
 					</li>
 				<?php endforeach; ?>
 				</ul>
