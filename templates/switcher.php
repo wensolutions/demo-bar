@@ -5,6 +5,7 @@
  * @package DemoBar
  */
 
+$demobar_options = get_option( 'demobar_options' );
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -47,10 +48,10 @@ if ( false !== $valid_key ) {
 			<?php endif ?>
 		</div> <!-- #dropdown -->
 		<div id="buttons">
-			<?php if ( isset( $sites[ $current_demo ]['download_url'] ) && ! empty( $sites[ $current_demo ]['download_url'] ) ) : ?>
+			<?php if ( isset( $sites[ $current_demo ]['download_url'] ) && ! empty( $sites[ $current_demo ]['download_url'] ) && true === $demobar_options['show_purchase_button']) : ?>
 				<a href="<?php echo esc_url( $sites[ $current_demo ]['download_url'] ); ?>" class="btn btn-download"><?php esc_html_e( 'Download', 'demo-bar' ); ?></a>
 			<?php endif ?>
-			<?php if ( isset( $sites[ $current_demo ]['site_url'] ) ) :  ?>
+			<?php if ( isset( $sites[ $current_demo ]['site_url'] ) && true === $demobar_options['show_close_button'] ) :  ?>
 				<a href="<?php echo esc_url( $sites[ $current_demo ]['site_url'] ); ?>" class="btn btn-close"><?php esc_html_e( 'Close', 'demo-bar' ); ?></a>
 			<?php endif ?>
 		</div><!-- #buttons -->
