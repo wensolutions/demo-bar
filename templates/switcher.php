@@ -50,9 +50,13 @@
 			<?php if ( isset( $sites[$current_demo]['download_url'] ) && ! empty( $sites[$current_demo]['download_url'] ) ) : ?>
 				<a href="<?php echo esc_url( $sites[$current_demo]['download_url'] ); ?>" class="btn btn-download"><?php _e( 'Download', 'demo-bar' ); ?></a>
 			<?php endif ?>
-			<a href="<?php echo esc_url( $sites[$current_demo]['site_url'] ); ?>" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
+			<?php if ( isset( $sites[$current_demo]['site_url'] ) ): ?>
+				<a href="<?php echo esc_url( $sites[$current_demo]['site_url'] ); ?>" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
+			<?php endif ?>
 		</div><!-- #buttons -->
 	</div>
-	<iframe id="frame-area" src="<?php echo esc_url( $sites[$current_demo]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
+	<?php if ( isset( $sites[$current_demo]['site_url'] ) ): ?>
+		<iframe id="frame-area" src="<?php echo esc_url( $sites[$current_demo]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
+	<?php endif ?>
 </body>
 </html>

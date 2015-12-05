@@ -6,8 +6,11 @@ html {
 }
 body {
 	overflow: hidden;
+	background-image: url("../images/bg.png");
+	background-repeat: repeat;
 }
 #db-switcher {
+	background-color: #666;
 	border-bottom: 1px solid #353535;
 	height: 59px;
 	position: fixed;
