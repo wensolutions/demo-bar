@@ -21,9 +21,9 @@ body {
 #frame-area {
 	position: absolute;
 	margin: 0 auto;
-	width: 100%;
 	padding-top: 60px;
 	height: 100%;
+	display: block;
 }
 #branding{
 	float: left;
@@ -31,6 +31,15 @@ body {
 }
 #branding img{
 	max-width: 50px;
+}
+#responsive{
+	display: inline-block;
+}
+#responsive a{
+	color: #FFF;
+}
+#responsive a.current{
+	border: 1px red solid;
 }
 #buttons{
 	float: right;

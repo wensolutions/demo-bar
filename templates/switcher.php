@@ -74,6 +74,13 @@ if ( false !== $valid_key ) {
 				</ul>
 			<?php endif ?>
 		</div> <!-- #dropdown -->
+		<div id="responsive">
+			<a title="View Desktop Version" rel="resp-desktop" href="#">Desktop</a>
+			<a title="View Tablet Landscape (1024x768)" rel="resp-tablet-landscape" href="#">TL</a>
+			<a title="View Tablet Portrait (768x1024)" rel="resp-tablet-portrait" href="#">TP</a>
+			<a title="View Mobile Landscape (480x320)" rel="resp-mobile-landscape" href="#">ML</a>
+			<a title="View Mobile Portrait (320x480)" rel="resp-mobile-portrait" href="#">MP</a>
+		</div>
 		<div id="buttons">
 			<?php if ( isset( $sites[ $current_demo ]['download_url'] ) && ! empty( $sites[ $current_demo ]['download_url'] ) && true === $demobar_options['show_purchase_button'] ) : ?>
 				<a href="<?php echo esc_url( $sites[ $current_demo ]['download_url'] ); ?>" class="btn btn-download"><?php esc_html_e( 'Download', 'demo-bar' ); ?></a>
