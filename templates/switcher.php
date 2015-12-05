@@ -21,21 +21,21 @@
 	$sites = DemoBar_Switcher::get_sites();
 	$site_param = ( isset( $_REQUEST['demo'] ) ) ? sanitize_key( $_REQUEST['demo'] ) : '';
 	$valid_key = false;
-	if ( ! empty( $sites ) ) {
-		$valid_key = demobar_array_find_by_key( $sites, 'slug', $site_param );
-		if ( false === $valid_key ) {
-			$first_element = reset( $sites );
-			$valid_key = $first_element['ID'];
-		}
+if ( ! empty( $sites ) ) {
+	$valid_key = demobar_array_find_by_key( $sites, 'slug', $site_param );
+	if ( false === $valid_key ) {
+		$first_element = reset( $sites );
+		$valid_key = $first_element['ID'];
 	}
-	if ( false !== $valid_key ) {
-		$current_demo = $valid_key;
-	}
+}
+if ( false !== $valid_key ) {
+	$current_demo = $valid_key;
+}
 ?>
 <body>
 	<div id="db-switcher">
 		<div id="dropdown">
-			<?php _e( 'Select', 'demo-bar' ); ?>
+			<?php esc_html_e( 'Select', 'demo-bar' ); ?>
 			<?php if ( ! empty( $sites ) ) : ?>
 				<ul>
 				<?php foreach ( $sites as $site ) : ?>
@@ -47,16 +47,16 @@
 			<?php endif ?>
 		</div> <!-- #dropdown -->
 		<div id="buttons">
-			<?php if ( isset( $sites[$current_demo]['download_url'] ) && ! empty( $sites[$current_demo]['download_url'] ) ) : ?>
-				<a href="<?php echo esc_url( $sites[$current_demo]['download_url'] ); ?>" class="btn btn-download"><?php _e( 'Download', 'demo-bar' ); ?></a>
+			<?php if ( isset( $sites[ $current_demo ]['download_url'] ) && ! empty( $sites[ $current_demo ]['download_url'] ) ) : ?>
+				<a href="<?php echo esc_url( $sites[ $current_demo ]['download_url'] ); ?>" class="btn btn-download"><?php esc_html_e( 'Download', 'demo-bar' ); ?></a>
 			<?php endif ?>
-			<?php if ( isset( $sites[$current_demo]['site_url'] ) ): ?>
-				<a href="<?php echo esc_url( $sites[$current_demo]['site_url'] ); ?>" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
+			<?php if ( isset( $sites[ $current_demo ]['site_url'] ) ) :  ?>
+				<a href="<?php echo esc_url( $sites[ $current_demo ]['site_url'] ); ?>" class="btn btn-close"><?php esc_html_e( 'Close', 'demo-bar' ); ?></a>
 			<?php endif ?>
 		</div><!-- #buttons -->
 	</div>
-	<?php if ( isset( $sites[$current_demo]['site_url'] ) ): ?>
-		<iframe id="frame-area" src="<?php echo esc_url( $sites[$current_demo]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
+	<?php if ( isset( $sites[ $current_demo ]['site_url'] ) ) :  ?>
+		<iframe id="frame-area" src="<?php echo esc_url( $sites[ $current_demo ]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
 	<?php endif ?>
 </body>
 </html>
