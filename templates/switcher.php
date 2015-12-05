@@ -27,9 +27,9 @@
 	}
 ?>
 <?php
-	$current_theme = '';
+	$current_demo = '';
 	$sites = DemoBar_Switcher::get_sites();
-	$site_param = ( isset( $_REQUEST['theme'] ) ) ? sanitize_key( $_REQUEST['theme'] ) : '';
+	$site_param = ( isset( $_REQUEST['demo'] ) ) ? sanitize_key( $_REQUEST['demo'] ) : '';
 	$valid_key = false;
 	if ( ! empty( $sites ) ) {
 		$valid_key = demo_bar_find_by_key( $sites, 'slug', $site_param );
@@ -39,7 +39,7 @@
 		}
 	}
 	if ( false !== $valid_key ) {
-		$current_theme = $valid_key;
+		$current_demo = $valid_key;
 	}
 ?>
 <body>
@@ -50,16 +50,16 @@
 				<ul>
 				<?php foreach ( $sites as $site ) : ?>
 					<li>
-						<a href="<?php echo esc_url( get_permalink() . '?theme='. esc_attr( $site['slug'] ) ); ?>"><?php echo esc_html( $site['title'] ); ?></a>
+						<a href="<?php echo esc_url( get_permalink() . '?demo='. esc_attr( $site['slug'] ) ); ?>"><?php echo esc_html( $site['title'] ); ?></a>
 					</li>
 				<?php endforeach; ?>
 				</ul>
 			<?php endif ?>
 		</div> <!-- #dropdown -->
 		<div id="buttons">
-			<a href="<?php echo esc_url( $sites[$current_theme]['site_url'] ); ?>" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
+			<a href="<?php echo esc_url( $sites[$current_demo]['site_url'] ); ?>" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
 		</div><!-- #buttons -->
 	</div>
-	<iframe id="frame-area" src="<?php echo esc_url( $sites[$current_theme]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
+	<iframe id="frame-area" src="<?php echo esc_url( $sites[$current_demo]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
 </body>
 </html>
