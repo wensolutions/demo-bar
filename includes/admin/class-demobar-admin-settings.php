@@ -15,10 +15,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class DemoBar_Admin_Settings {
 
-	var $options = array();
+	/**
+	 * Plugin options.
+	 *
+	 * @var array
+	 * @since 1.0.0
+	 */
+
+	public $options = array();
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->options = get_option( 'demobar_options' );
@@ -31,9 +40,9 @@ class DemoBar_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	function setup_menu(){
+	function setup_menu() {
 
-		add_submenu_page( 'edit.php?post_type=dbsite', __( 'Demo Bar Settings', 'demo-bar' ), __( 'Settings', 'demo-bar' ), 'manage_options', 'demo-bar', array( &$this,'settings_page_init' ) );
+		add_submenu_page( 'edit.php?post_type=dbsite', __( 'Demo Bar Settings', 'demo-bar' ), __( 'Settings', 'demo-bar' ), 'manage_options', 'demo-bar', array( &$this, 'settings_page_init' ) );
 
 	}
 
@@ -42,9 +51,9 @@ class DemoBar_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	function settings_page_init(){
+	function settings_page_init() {
 
-		include( sprintf( "%s/templates/admin/admin-settings.php", DEMOBAR_PLUGIN_URI ) );
+		include( sprintf( '%s/templates/admin/admin-settings.php', DEMOBAR_PLUGIN_URI ) );
 
 	}
 
@@ -53,7 +62,7 @@ class DemoBar_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	function register_settings(){
+	function register_settings() {
 
 		register_setting( 'demobar-plugin-options-group', 'demobar_options', array( $this, 'validate_plugin_options' ) );
 
@@ -70,7 +79,7 @@ class DemoBar_Admin_Settings {
 	 * @param array $input Input options.
 	 * @return array Validated options.
 	 */
-	function validate_plugin_options( $input ){
+	function validate_plugin_options( $input ) {
 		$input['logo'] = esc_url_raw( $input['logo'] );
 		return $input;
 	}
@@ -81,7 +90,7 @@ class DemoBar_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	function plugin_section_general_text_callback(){
+	function plugin_section_general_text_callback() {
 		return;
 	}
 
@@ -90,10 +99,10 @@ class DemoBar_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	function demobar_field_logo_callback(){
+	function demobar_field_logo_callback() {
 		$logo = '';
 		if ( isset( $this->options['logo'] ) ) {
-		  $logo = $this->options['logo'];
+			$logo = $this->options['logo'];
 		}
 		?>
 		<input type="text" name="demobar_options[logo]" value="<?php echo esc_url( $logo ); ?>" />

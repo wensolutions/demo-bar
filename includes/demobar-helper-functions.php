@@ -20,8 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string|int|bool If found return matched ID, else return FALSE.
  */
 function demobar_array_find_by_key( $array, $field, $value ) {
-	foreach( $array as $key => $product ) {
-		if ( $product[ $field ] === $value ){
+	foreach ( $array as $key => $product ) {
+		if ( $product[ $field ] === $value ) {
 			return $key;
 		}
 	}
