@@ -75,8 +75,6 @@ before_script:
     - cd /tmp/wordpress/src/wp-content/plugins/$plugin_slug/
     # After CodeSniffer install you should refresh your path.
     - phpenv rehash
-    # Install CSSLint, a CSS Code Quality Tool.
-    - npm install -g csslint
 
 # Run test script commands.
 # Default is specific to project language.
@@ -98,8 +96,6 @@ script:
     # - phpunit --configuration "/tmp/wordpress/src/wp-content/plugins/$THEME_DIR/phpunit.xml.dist"
     # Test the theme
     - phpunit
-    # Trigger CSS Lint
-    - csslint css/*
 
 # Receive notifications for build results.
 # @link http://docs.travis-ci.com/user/notifications/#Email-notifications
