@@ -101,6 +101,11 @@ class DemoBar_Admin_Settings {
 		add_settings_field( 'demobar_field_demo_page', __( 'Demo Page', 'demo-bar' ), array( $this, 'demobar_field_demo_page_callback' ), 'demobar-page', 'demobar_page_settings' );
 		add_settings_field( 'demobar_field_page_meta_description', __( 'Meta Description', 'demo-bar' ), array( $this, 'demobar_field_page_meta_description_callback' ), 'demobar-page', 'demobar_page_settings' );
 		add_settings_field( 'demobar_field_page_meta_keywords', __( 'Meta Keywords', 'demo-bar' ), array( $this, 'demobar_field_page_meta_keywords_callback' ), 'demobar-page', 'demobar_page_settings' );
+
+		// Advance settings.
+		add_settings_section( 'demobar_advance_settings', __( 'Advance Settings', 'demo-bar' ) , array( $this, 'plugin_section_advance_text_callback' ), 'demobar-advance' );
+		add_settings_field( 'demobar_field_custom_css', __( 'Custom CSS', 'demo-bar' ), array( $this, 'demobar_field_custom_css_callback' ), 'demobar-advance', 'demobar_advance_settings' );
+
 	}
 
 	/**
@@ -120,6 +125,7 @@ class DemoBar_Admin_Settings {
 		$input['demo_page']              = absint( $input['demo_page'] );
 		$input['page_meta_description']  = wp_filter_nohtml_kses( $input['page_meta_description'] );
 		$input['page_meta_keywords']     = wp_filter_nohtml_kses( $input['page_meta_keywords'] );
+		$input['custom_css']             = wp_filter_nohtml_kses( $input['custom_css'] );
 		return $input;
 	}
 
@@ -139,6 +145,15 @@ class DemoBar_Admin_Settings {
 	 * @since 1.0.0
 	 */
 	function plugin_section_page_text_callback() {
+		return;
+	}
+
+	/**
+	 * Callback function to display heading in advance section.
+	 *
+	 * @since 1.0.0
+	 */
+	function plugin_section_advance_text_callback() {
 		return;
 	}
 
@@ -263,6 +278,21 @@ class DemoBar_Admin_Settings {
 		}
 		?>
 		<textarea name="demobar_options[page_meta_keywords]" rows="5" class="large-text"><?php echo esc_textarea( $page_meta_keywords ); ?></textarea>
+		<?php
+	}
+
+	/**
+	 * Callback function for settings field - custom_css.
+	 *
+	 * @since 1.0.0
+	 */
+	function demobar_field_custom_css_callback() {
+		$custom_css = '';
+		if ( isset( $this->options['custom_css'] ) ) {
+			$custom_css = $this->options['custom_css'];
+		}
+		?>
+		<textarea name="demobar_options[custom_css]" rows="8" class="large-text"><?php echo esc_textarea( $custom_css ); ?></textarea>
 		<?php
 	}
 }

@@ -59,6 +59,8 @@ class DemoBar_Install {
 			'demo_page'              => '',
 			'page_meta_description'  => '',
 			'page_meta_keywords'     => '',
+			// Advance options.
+			'custom_css'             => '',
 		);
 		return $default;
 	}
