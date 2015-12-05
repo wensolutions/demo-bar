@@ -15,13 +15,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class DemoBar_Admin_Settings {
 
+	var $options = array();
+
 	/**
 	 * Constructor.
 	 */
 	public function __construct() {
+		$this->options = get_option( 'demobar_options' );
 		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
-		// add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-		// add_action( 'save_post', array( $this, 'save_meta_boxes' ), 10, 3 );
+		add_action( 'admin_init', array( $this, 'register_settings' ) );
 	}
 
 	/**
@@ -47,83 +49,55 @@ class DemoBar_Admin_Settings {
 	}
 
 	/**
-	 * Add WC Meta boxes.
-	 */
-	public function add_meta_boxes() {
-		add_meta_box(
-			'dbsite-settings',
-			esc_html__( 'Site Info', 'demo-bar' ),
-			array( $this, 'render_site_settings_metabox' ),
-			'dbsite'
-		);
-	}
-	/**
-	 * Render site settings metabox.
+	 * Register plugin settings.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param WP_Post $post    WP_Post object.
-	 * @param array   $metabox Metabox arguments.
 	 */
-	function render_site_settings_metabox( $post, $metabox ) {
-		// Meta box nonce for verification.
-		wp_nonce_field( 'demobar_save_data', 'demobar_meta_nonce' );
+	function register_settings(){
 
-		$demo_bar_site_url     = get_post_meta( $post->ID, 'demo_bar_site_url', true );
-		$demo_bar_download_url = get_post_meta( $post->ID, 'demo_bar_download_url', true );
-		?>
-		<p>
-			<label for="demo_bar_site_url"><?php echo esc_html__( 'Site URL', 'demo-bar' ); ?><br /><input type="text" value="<?php echo esc_url( $demo_bar_site_url ); ?>" class="regular-text" name="demo_bar_site_url" id="demo_bar_site_url" /></label>
-		</p>
-		<p>
-			<label for="demo_bar_download_url"><?php echo esc_html__( 'Download URL', 'demo-bar' ); ?><br /><input type="text" value="<?php echo esc_url( $demo_bar_download_url ); ?>" class="regular-text" name="demo_bar_download_url" id="demo_bar_download_url" /></label>
-		</p>
-		<?php
+		register_setting( 'demobar-plugin-options-group', 'demobar_options', array( $this, 'validate_plugin_options' ) );
+
+		// General settings.
+		add_settings_section( 'demobar_general_settings', __( 'General', 'demo-bar' ) , array( $this, 'plugin_section_general_text_callback' ), 'demobar-general' );
+		add_settings_field( 'demobar_field_logo', __( 'Logo', 'demo-bar' ), array( $this, 'demobar_field_logo_callback' ), 'demobar-general', 'demobar_general_settings' );
 	}
+
 	/**
-	 * Save site settings meta box.
+	 * Validate plugin options.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int     $post_ID Post ID.
-	 * @param WP_Post $post    Post object.
-	 * @param bool    $update  Whether this is an existing post being updated or not.
+	 * @param array $input Input options.
+	 * @return array Validated options.
 	 */
-	function save_meta_boxes( $post_ID, $post, $update ) {
-		// Verify nonce.
-		if ( ! isset( $_POST['demobar_meta_nonce'] ) || ! wp_verify_nonce( $_POST['demobar_meta_nonce'], 'demobar_save_data' ) ) {
-			return;
+	function validate_plugin_options( $input ){
+		$input['logo'] = esc_url_raw( $input['logo'] );
+		return $input;
+	}
+
+
+	/**
+	 * Callback function to display heading in general section.
+	 *
+	 * @since 1.0.0
+	 */
+	function plugin_section_general_text_callback(){
+		return;
+	}
+
+	/**
+	 * Callback function for settings field - logo.
+	 *
+	 * @since 1.0.0
+	 */
+	function demobar_field_logo_callback(){
+		$logo = '';
+		if ( isset( $this->options['logo'] ) ) {
+		  $logo = $this->options['logo'];
 		}
-		// Bail if auto save or revision.
-		if ( defined( 'DOING_AUTOSAVE' ) || is_int( wp_is_post_revision( $post ) ) || is_int( wp_is_post_autosave( $post ) ) ) {
-			return;
-		}
-		// Check the post being saved == the $post_ID to prevent triggering this call for other save_post events.
-		if ( empty( $_POST['post_ID'] ) || absint( $_POST['post_ID'] ) !== $post_ID ) {
-			return;
-		}
-		// Check permission.
-		if ( 'page' === $_POST['post_type'] ) {
-			if ( ! current_user_can( 'edit_page', $post_ID ) ) {
-				return;
-			}
-		} else if ( ! current_user_can( 'edit_post', $post_ID ) ) {
-			return;
-		}
-		$site_settings_fields = array(
-			'demo_bar_site_url',
-			'demo_bar_download_url',
-		);
-		foreach ( $site_settings_fields as $key ) {
-			if ( isset( $_POST[ $key ] ) ) {
-				$post_value = $_POST[ $key ];
-				if ( empty( $post_value ) ) {
-					delete_post_meta( $post_ID, $key );
-				} else {
-					update_post_meta( $post_ID, $key, esc_url_raw( $post_value ) );
-				}
-			}
-		} // End foreach loop.
+		?>
+		<input type="text" name="demobar_options[logo]" value="<?php echo esc_url( $logo ); ?>" />
+		<?php
 	}
 }
 

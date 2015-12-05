@@ -15,12 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div id="poststuff">
 		<div id="post-body" class="metabox-holder columns-2">
 			<div id="post-body-content">
-				<form action="" method="post">
+				<form action="options.php" method="post">
 					<?php settings_fields( 'demobar-plugin-options-group' ); ?>
 					<div class="meta-box-sortables ui-sortable">
 						<div class="postbox">
 							<div class="inside">
-								<?php do_settings_sections( 'demo-bar-general' ); ?>
+								<?php do_settings_sections( 'demobar-general' ); ?>
 							</div> <!-- .inside -->
 						</div> <!-- .postbox -->
 					</div> <!-- .meta-box-sortables .ui-sortable -->
