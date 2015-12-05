@@ -146,7 +146,6 @@ class DemoBar_Admin_Post_Types {
 			8  => __( 'Site submitted.', 'demo-bar' ),
 			9  => sprintf(
 				__( 'Site scheduled for: <strong>%1$s</strong>.', 'demo-bar' ),
-				// translators: Publish box date format, see http://php.net/date
 				date_i18n( __( 'M j, Y @ G:i', 'demo-bar' ), strtotime( $post->post_date ) )
 			),
 			10 => __( 'Site draft updated.', 'demo-bar' ),
