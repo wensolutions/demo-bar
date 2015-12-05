@@ -34,6 +34,9 @@ class DemoBar_Admin_Post_Types {
 
 		// Customize Row actions.
 		add_filter( 'post_row_actions', array( $this, 'customize_row_actions' ), 10, 2 );
+
+		// Customize post updated messages.
+		add_filter( 'post_updated_messages', array( $this, 'updated_messages' ) );
 	}
 
 	/**
@@ -100,6 +103,7 @@ class DemoBar_Admin_Post_Types {
 				break;
 		}
 	}
+
 	/**
 	 * Customize row actions.
 	 *
@@ -114,8 +118,43 @@ class DemoBar_Admin_Post_Types {
 		}
 		return $actions;
 	}
+
+	/**
+	 * Customize post updated messages.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $messages Existing post update messages.
+	 * @return array Amended post update messages with new CPT update messages.
+	 */
+	function updated_messages( $messages ) {
+
+		$post             = get_post();
+		$post_type        = get_post_type( $post );
+		$post_type_object = get_post_type_object( $post_type );
+
+		$messages['dbsite'] = array(
+			0  => '', // Unused. Messages start at index 1.
+			1  => __( 'Site updated.', 'demo-bar' ),
+			2  => __( 'Custom field updated.', 'demo-bar' ),
+			3  => __( 'Custom field deleted.', 'demo-bar' ),
+			4  => __( 'Site updated.', 'demo-bar' ),
+			/* translators: %s: date and time of the revision */
+			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Site restored to revision from %s', 'demo-bar' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6  => __( 'Site published.', 'demo-bar' ),
+			7  => __( 'Site saved.', 'demo-bar' ),
+			8  => __( 'Site submitted.', 'demo-bar' ),
+			9  => sprintf(
+				__( 'Site scheduled for: <strong>%1$s</strong>.', 'demo-bar' ),
+				// translators: Publish box date format, see http://php.net/date
+				date_i18n( __( 'M j, Y @ G:i', 'demo-bar' ), strtotime( $post->post_date ) )
+			),
+			10 => __( 'Site draft updated.', 'demo-bar' ),
+		);
+
+		return $messages;
+	}
 }
 endif;
-
 
 new DemoBar_Admin_Post_Types();
