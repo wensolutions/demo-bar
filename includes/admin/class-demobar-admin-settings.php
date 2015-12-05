@@ -69,6 +69,7 @@ class DemoBar_Admin_Settings {
 		// General settings.
 		add_settings_section( 'demobar_general_settings', __( 'General Settings', 'demo-bar' ) , array( $this, 'plugin_section_general_text_callback' ), 'demobar-general' );
 		add_settings_field( 'demobar_field_logo', __( 'Logo', 'demo-bar' ), array( $this, 'demobar_field_logo_callback' ), 'demobar-general', 'demobar_general_settings' );
+		add_settings_field( 'demobar_field_background_color', __( 'Background Color', 'demo-bar' ), array( $this, 'demobar_field_background_color_callback' ), 'demobar-general', 'demobar_general_settings' );
 		add_settings_field( 'demobar_field_show_responsive_button', __( 'Show Responsive', 'demo-bar' ), array( $this, 'demobar_field_show_responsive_button_callback' ), 'demobar-general', 'demobar_general_settings' );
 		add_settings_field( 'demobar_field_show_purchase_button', __( 'Show Purchase', 'demo-bar' ), array( $this, 'demobar_field_show_purchase_button_callback' ), 'demobar-general', 'demobar_general_settings' );
 		add_settings_field( 'demobar_field_show_close_button', __( 'Show Close', 'demo-bar' ), array( $this, 'demobar_field_show_close_button_callback' ), 'demobar-general', 'demobar_general_settings' );
@@ -90,6 +91,7 @@ class DemoBar_Admin_Settings {
 	 */
 	function validate_plugin_options( $input ) {
 		$input['logo']                   = esc_url_raw( $input['logo'] );
+		$input['background_color']       = esc_attr( $input['background_color'] );
 		$input['show_responsive_button'] = isset( $input['show_responsive_button'] ) ? true : false;
 		$input['show_purchase_button']   = isset( $input['show_purchase_button'] ) ? true : false;
 		$input['show_close_button']      = isset( $input['show_close_button'] ) ? true : false;
@@ -131,6 +133,21 @@ class DemoBar_Admin_Settings {
 		?>
 		<input type="text" name="demobar_options[logo]" value="<?php echo esc_url( $logo ); ?>" />
 		<p class="description"><?php esc_html_e( 'Enter full URL', 'demo-bar' ) ?></p><!-- .description -->
+		<?php
+	}
+
+	/**
+	 * Callback function for settings field - background_color.
+	 *
+	 * @since 1.0.0
+	 */
+	function demobar_field_background_color_callback() {
+		$background_color = '';
+		if ( isset( $this->options['background_color'] ) ) {
+			$background_color = $this->options['background_color'];
+		}
+		?>
+		<input type="text" name="demobar_options[background_color]" value="<?php echo esc_url( $background_color ); ?>" class="select-color"/>
 		<?php
 	}
 

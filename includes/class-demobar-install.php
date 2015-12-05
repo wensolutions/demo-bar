@@ -51,13 +51,14 @@ class DemoBar_Install {
 		$default = array(
 			// General options.
 			'logo'                   => '',
+			'background_color'       => '#333',
 			'show_responsive_button' => true,
 			'show_purchase_button'   => true,
 			'show_close_button'      => true,
 			// Page options.
-			'demo_page'             => '',
-			'page_meta_description' => '',
-			'page_meta_keywords'    => '',
+			'demo_page'              => '',
+			'page_meta_description'  => '',
+			'page_meta_keywords'     => '',
 		);
 		return $default;
 	}
