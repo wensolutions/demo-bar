@@ -1,3 +1,11 @@
+<?php
+/**
+ * Admin sidebar.
+ *
+ * @package DemoBar
+ */
+
+?>
 <div class="meta-box-sortables">
 
 	<div class="postbox">

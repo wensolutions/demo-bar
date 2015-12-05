@@ -68,7 +68,7 @@ if ( false !== $valid_key ) {
 			<?php endif ?>
 		</div> <!-- #dropdown -->
 		<div id="buttons">
-			<?php if ( isset( $sites[ $current_demo ]['download_url'] ) && ! empty( $sites[ $current_demo ]['download_url'] ) && true === $demobar_options['show_purchase_button']) : ?>
+			<?php if ( isset( $sites[ $current_demo ]['download_url'] ) && ! empty( $sites[ $current_demo ]['download_url'] ) && true === $demobar_options['show_purchase_button'] ) : ?>
 				<a href="<?php echo esc_url( $sites[ $current_demo ]['download_url'] ); ?>" class="btn btn-download"><?php esc_html_e( 'Download', 'demo-bar' ); ?></a>
 			<?php endif ?>
 			<?php if ( isset( $sites[ $current_demo ]['site_url'] ) && true === $demobar_options['show_close_button'] ) :  ?>
