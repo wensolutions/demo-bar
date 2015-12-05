@@ -47,6 +47,9 @@
 			<?php endif ?>
 		</div> <!-- #dropdown -->
 		<div id="buttons">
+			<?php if ( isset( $sites[$current_demo]['download_url'] ) && ! empty( $sites[$current_demo]['download_url'] ) ) : ?>
+				<a href="<?php echo esc_url( $sites[$current_demo]['download_url'] ); ?>" class="btn btn-download"><?php _e( 'Download', 'demo-bar' ); ?></a>
+			<?php endif ?>
 			<a href="<?php echo esc_url( $sites[$current_demo]['site_url'] ); ?>" class="btn btn-close"><?php _e( 'Close', 'demo-bar' ); ?></a>
 		</div><!-- #buttons -->
 	</div>
