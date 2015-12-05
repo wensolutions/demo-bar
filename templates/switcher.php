@@ -35,6 +35,11 @@ if ( false !== $valid_key ) {
 ?>
 <body>
 	<div id="db-switcher">
+		<?php if ( isset( $demobar_options['logo'] ) && ! empty( $demobar_options['logo'] ) ) : ?>
+			<div id="branding">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( $demobar_options['logo'] ); ?>" alt="<?php bloginfo( 'name' ); ?>" /></a>
+			</div><!-- #branding -->
+		<?php endif ?>
 		<div id="dropdown">
 			<?php esc_html_e( 'Select', 'demo-bar' ); ?>
 			<?php if ( ! empty( $sites ) ) : ?>
