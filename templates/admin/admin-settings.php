@@ -36,7 +36,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div><!-- #post-body-content -->
 
 			<div id="postbox-container-1" class="postbox-container">
-				<h3>Sidebar</h3>
+				<?php
+					include( DEMOBAR_PLUGIN_URI . '/templates/admin/admin-sidebar.php' );
+				 ?>
 			</div> <!-- #postbox-container-1 .postbox-container -->
 		</div><!-- #post-body -->
 	</div> <!-- #poststuff -->

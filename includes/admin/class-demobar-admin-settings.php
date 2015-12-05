@@ -130,6 +130,7 @@ class DemoBar_Admin_Settings {
 		}
 		?>
 		<input type="text" name="demobar_options[logo]" value="<?php echo esc_url( $logo ); ?>" />
+		<p class="description"><?php esc_html_e( 'Enter full URL', 'demo-bar' ) ?></p><!-- .description -->
 		<?php
 	}
 
