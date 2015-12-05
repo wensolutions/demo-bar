@@ -69,6 +69,9 @@ class DemoBar_Admin_Settings {
 		// General settings.
 		add_settings_section( 'demobar_general_settings', __( 'General', 'demo-bar' ) , array( $this, 'plugin_section_general_text_callback' ), 'demobar-general' );
 		add_settings_field( 'demobar_field_logo', __( 'Logo', 'demo-bar' ), array( $this, 'demobar_field_logo_callback' ), 'demobar-general', 'demobar_general_settings' );
+		add_settings_field( 'demobar_field_show_responsive_button', __( 'Show Responsive', 'demo-bar' ), array( $this, 'demobar_field_show_responsive_button_callback' ), 'demobar-general', 'demobar_general_settings' );
+		add_settings_field( 'demobar_field_show_purchase_button', __( 'Show Purchase', 'demo-bar' ), array( $this, 'demobar_field_show_purchase_button_callback' ), 'demobar-general', 'demobar_general_settings' );
+		add_settings_field( 'demobar_field_show_close_button', __( 'Show Close', 'demo-bar' ), array( $this, 'demobar_field_show_close_button_callback' ), 'demobar-general', 'demobar_general_settings' );
 	}
 
 	/**
@@ -80,7 +83,10 @@ class DemoBar_Admin_Settings {
 	 * @return array Validated options.
 	 */
 	function validate_plugin_options( $input ) {
-		$input['logo'] = esc_url_raw( $input['logo'] );
+		$input['logo']                   = esc_url_raw( $input['logo'] );
+		$input['show_responsive_button'] = isset( $input['show_responsive_button'] ) ? true : false;
+		$input['show_purchase_button']   = isset( $input['show_purchase_button'] ) ? true : false;
+		$input['show_close_button']      = isset( $input['show_close_button'] ) ? true : false;
 		return $input;
 	}
 
@@ -106,6 +112,51 @@ class DemoBar_Admin_Settings {
 		}
 		?>
 		<input type="text" name="demobar_options[logo]" value="<?php echo esc_url( $logo ); ?>" />
+		<?php
+	}
+
+	/**
+	 * Callback function for settings field - show_responsive_button.
+	 *
+	 * @since 1.0.0
+	 */
+	function demobar_field_show_responsive_button_callback() {
+		$show_responsive_button = '';
+		if ( isset( $this->options['show_responsive_button'] ) ) {
+			$show_responsive_button = $this->options['show_responsive_button'];
+		}
+		?>
+		<input type="checkbox" name="demobar_options[show_responsive_button]" <?php checked( $show_responsive_button, true ); ?>/>
+		<?php
+	}
+
+	/**
+	 * Callback function for settings field - show_purchase_button.
+	 *
+	 * @since 1.0.0
+	 */
+	function demobar_field_show_purchase_button_callback() {
+		$show_purchase_button = '';
+		if ( isset( $this->options['show_purchase_button'] ) ) {
+			$show_purchase_button = $this->options['show_purchase_button'];
+		}
+		?>
+		<input type="checkbox" name="demobar_options[show_purchase_button]" <?php checked( $show_purchase_button, true ); ?>/>
+		<?php
+	}
+
+	/**
+	 * Callback function for settings field - show_close_button.
+	 *
+	 * @since 1.0.0
+	 */
+	function demobar_field_show_close_button_callback() {
+		$show_close_button = '';
+		if ( isset( $this->options['show_close_button'] ) ) {
+			$show_close_button = $this->options['show_close_button'];
+		}
+		?>
+		<input type="checkbox" name="demobar_options[show_close_button]" <?php checked( $show_close_button, true ); ?>/>
 		<?php
 	}
 }

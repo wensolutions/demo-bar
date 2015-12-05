@@ -50,8 +50,8 @@ class DemoBar_Install {
 	public static function get_default_settings() {
 		$default = array(
 			'logo'                   => '',
-			'show_purchase_button'   => true,
 			'show_responsive_button' => true,
+			'show_purchase_button'   => true,
 			'show_close_button'      => true,
 		);
 		return $default;
