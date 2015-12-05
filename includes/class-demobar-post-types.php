@@ -31,9 +31,10 @@ class DemoBar_Post_Types {
 			return;
 		}
 		$labels = array(
-			'name'                  => __( 'Sites', 'demo-bar' ),
+			'name'                  => __( 'Demo Bar', 'demo-bar' ),
 			'singular_name'         => __( 'Site', 'demo-bar' ),
-			'menu_name'             => _x( 'Sites', 'Admin menu name', 'demo-bar' ),
+			'menu_name'             => __( 'Demo Bar', 'demo-bar' ),
+			'all_items'             => __( 'Sites', 'demo-bar' ),
 			'add_new'               => __( 'Add Site', 'demo-bar' ),
 			'add_new_item'          => __( 'Add New Site', 'demo-bar' ),
 			'edit'                  => __( 'Edit', 'demo-bar' ),
