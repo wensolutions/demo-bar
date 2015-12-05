@@ -30,6 +30,7 @@ class DemoBar_Admin {
 	 */
 	public function includes() {
 		require_once( 'class-demobar-admin-post-types.php' );
+		require_once( 'class-demobar-admin-settings.php' );
 	}
 }
 
