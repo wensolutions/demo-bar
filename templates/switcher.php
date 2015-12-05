@@ -17,22 +17,12 @@
 	<script src="<?php echo DEMOBAR_PLUGIN_URL; ?>/js/front.js"></script>
 </head>
 <?php
-	function demo_bar_find_by_key( $products, $field, $value ) {
-		foreach( $products as $key => $product ) {
-			if ( $product[$field] === $value ){
-				return $key;
-			}
-		}
-		return false;
-	}
-?>
-<?php
 	$current_demo = '';
 	$sites = DemoBar_Switcher::get_sites();
 	$site_param = ( isset( $_REQUEST['demo'] ) ) ? sanitize_key( $_REQUEST['demo'] ) : '';
 	$valid_key = false;
 	if ( ! empty( $sites ) ) {
-		$valid_key = demo_bar_find_by_key( $sites, 'slug', $site_param );
+		$valid_key = demobar_array_find_by_key( $sites, 'slug', $site_param );
 		if ( false === $valid_key ) {
 			$first_element = reset( $sites );
 			$valid_key = $first_element['ID'];

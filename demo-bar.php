@@ -106,6 +106,7 @@ if ( ! class_exists( 'DemoBar' ) ) :
 		 * @since 1.0.0
 		 */
 		public function includes() {
+			include_once( 'includes/demobar-core-functions.php' );
 			include_once( 'includes/class-demobar-post-types.php' );
 			include_once( 'includes/class-demobar-install.php' );
 			include_once( 'includes/class-demobar-switcher.php' );
