@@ -49,10 +49,15 @@ class DemoBar_Install {
 	 */
 	public static function get_default_settings() {
 		$default = array(
+			// General options.
 			'logo'                   => '',
 			'show_responsive_button' => true,
 			'show_purchase_button'   => true,
 			'show_close_button'      => true,
+			// Page options.
+			'demo_page'             => '',
+			'page_meta_description' => '',
+			'page_meta_keywords'    => '',
 		);
 		return $default;
 	}

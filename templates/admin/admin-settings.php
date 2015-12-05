@@ -24,6 +24,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</div> <!-- .inside -->
 						</div> <!-- .postbox -->
 					</div> <!-- .meta-box-sortables .ui-sortable -->
+					<div class="meta-box-sortables ui-sortable">
+						<div class="postbox">
+							<div class="inside">
+								<?php do_settings_sections( 'demobar-page' ); ?>
+							</div> <!-- .inside -->
+						</div> <!-- .postbox -->
+					</div> <!-- .meta-box-sortables .ui-sortable -->
 					<?php submit_button( __( 'Save Changes', 'demo-bar' ) ); ?>
 				</form>
 			</div><!-- #post-body-content -->

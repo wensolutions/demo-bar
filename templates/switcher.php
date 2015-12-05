@@ -11,7 +11,14 @@ $demobar_options = get_option( 'demobar_options' );
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<title><?php bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
+	<?php if ( isset( $demobar_options['page_meta_description'] ) && ! empty( $demobar_options['page_meta_description'] ) ) : ?>
+	<meta name="description" content="<?php echo esc_attr( $demobar_options['page_meta_description'] ); ?>" >
+	<?php endif ?>
+	<?php if ( isset( $demobar_options['page_meta_keywords'] ) && ! empty( $demobar_options['page_meta_keywords'] ) ) : ?>
+	<meta name="keywords" content="<?php echo esc_attr( $demobar_options['page_meta_keywords'] ); ?>" >
+	<?php endif ?>
 	<link rel="stylesheet" href="<?php echo DEMOBAR_PLUGIN_URL; ?>/css/front.css">
 	<script src="<?php echo esc_url( site_url() ); ?>/wp-includes/js/jquery/jquery.js"></script>
 	<script src="<?php echo esc_url( site_url() ); ?>/wp-includes/js/jquery/jquery-migrate.min.js"></script>
