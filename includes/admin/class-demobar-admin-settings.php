@@ -33,6 +33,7 @@ class DemoBar_Admin_Settings {
 		$this->options = get_option( 'demobar_options' );
 		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_plugin_scripts' ) );
 	}
 
 	/**
@@ -54,6 +55,27 @@ class DemoBar_Admin_Settings {
 	function settings_page_init() {
 
 		include( sprintf( '%s/templates/admin/admin-settings.php', DEMOBAR_PLUGIN_URI ) );
+
+	}
+
+	/**
+	 * Load admin scripts and styles.
+	 *
+	 * @since 1.0.0
+	 */
+	function admin_plugin_scripts() {
+
+		$screen = get_current_screen();
+		if ( 'dbsite_page_demo-bar' !== $screen->id ) {
+			return;
+		}
+
+		// Color.
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( 'wp-color-picker' );
+
+		// Custom.
+		wp_enqueue_script( 'demobar-script', DEMOBAR_PLUGIN_URL . '/js/admin.js', array( 'jquery' ) );
 
 	}
 
