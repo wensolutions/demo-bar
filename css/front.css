@@ -1,5 +1,6 @@
 * {
 	margin: 0;
+	outline: none;
 }
 html {
 	margin: 0 !important;
@@ -37,9 +38,11 @@ body {
 }
 #responsive a{
 	color: #FFF;
+	margin-right: 5px;
+	padding: 2px;
 }
 #responsive a.current{
-	border: 1px red solid;
+	color: #ff0000;
 }
 #buttons{
 	float: right;
