@@ -245,10 +245,15 @@ class DemoBar_Admin_Settings {
 		}
 		wp_dropdown_pages(
 			array(
-				'selected' => $demo_page,
-				'name'     => 'demobar_options[demo_page]',
+				'selected'         => $demo_page,
+				'show_option_none' => esc_html__( '&mdash; Select &mdash;' ),
+				'name'             => 'demobar_options[demo_page]',
 			)
 		);
+		if ( $demo_page ) {
+			echo '&nbsp;&nbsp;';
+			echo '<a href="' . esc_url( get_permalink( $demo_page ) ) . '" target="_blank">' . get_permalink( $demo_page ) . '</a>';
+		}
 	}
 
 	/**
