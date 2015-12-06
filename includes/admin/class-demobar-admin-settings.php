@@ -34,6 +34,7 @@ class DemoBar_Admin_Settings {
 		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_plugin_scripts' ) );
+		add_action( 'admin_notices', array( $this, 'plugin_notices' ) );
 	}
 
 	/**
@@ -76,6 +77,34 @@ class DemoBar_Admin_Settings {
 
 		// Custom.
 		wp_enqueue_script( 'demobar-script', DEMOBAR_PLUGIN_URL . '/js/admin.js', array( 'jquery' ) );
+
+	}
+
+	/**
+	 * Custom plugin admin notices.
+	 *
+	 * @since 1.0.0
+	 */
+	function plugin_notices() {
+
+		$demobar_options = get_option( 'demobar_options' );
+		if ( isset( $demobar_options['demo_page'] ) && absint( $demobar_options['demo_page'] ) > 0 ) {
+			return;
+		}
+		$class = 'error';
+		$settings_url = add_query_arg(
+			array(
+				'post_type' => 'dbsite',
+				'page'      => 'demo-bar',
+			),
+			admin_url( 'edit.php' )
+		);
+		$message = __( 'Demo Page is not set.', 'demo-bar' );
+		$message .= ' ' . sprintf( __( '%sDemo Bar Settings%s', 'demo-bar' ),
+			'<a href="' . esc_url( $settings_url ) . '">',
+			'</a>'
+		);
+		echo '<div class="' . $class .'"><p>' . $message . '</p></div>';
 
 	}
 

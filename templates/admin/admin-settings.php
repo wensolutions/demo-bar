@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="wrap">
-	<h1><?php _e( 'Demo Bar', 'demo-bar' ); ?></h1>
+	<h1><?php esc_html_e( 'Demo Bar', 'demo-bar' ); ?></h1>
 	<div id="poststuff">
 		<div id="post-body" class="metabox-holder columns-2">
 			<div id="post-body-content">
@@ -44,8 +44,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div id="postbox-container-1" class="postbox-container">
 				<?php
-					include( DEMOBAR_PLUGIN_URI . '/templates/admin/admin-sidebar.php' );
-				 ?>
+				include( DEMOBAR_PLUGIN_URI . '/templates/admin/admin-sidebar.php' );
+				?>
 			</div> <!-- #postbox-container-1 .postbox-container -->
 		</div><!-- #post-body -->
 	</div> <!-- #poststuff -->
