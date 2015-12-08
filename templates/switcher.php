@@ -76,11 +76,11 @@ if ( false !== $valid_key ) {
 			<?php endif ?>
 		</div> <!-- #dropdown -->
 		<div id="responsive">
-			<a title="View Desktop Version" rel="resp-desktop" href="#" class="current"><i class="fa fa-desktop fa-lg"></i></a>
-			<a title="View Tablet Landscape (1024x768)" rel="resp-tablet-landscape" href="#"><i class="fa fa-tablet fa-rotate-90 fa-lg"></i></a>
-			<a title="View Tablet Portrait (768x1024)" rel="resp-tablet-portrait" href="#"><i class="fa fa-tablet fa-lg"></i></a>
-			<a title="View Mobile Landscape (480x320)" rel="resp-mobile-landscape" href="#"><i class="fa fa-mobile fa-rotate-90 fa-lg"></i></a>
-			<a title="View Mobile Portrait (320x480)" rel="resp-mobile-portrait" href="#"><i class="fa fa-mobile fa-lg"></i></a>
+			<a title="<?php esc_html_e( 'Desktop', 'demo-bar' ); ?>" rel="resp-desktop" href="#" class="current"><i class="fa fa-desktop fa-lg"></i></a>
+			<a title="<?php esc_html_e( 'Tablet Landscape (1024x768)', 'demo-bar' ); ?>" rel="resp-tablet-landscape" href="#"><i class="fa fa-tablet fa-rotate-270 fa-lg"></i></a>
+			<a title="<?php esc_html_e( 'Tablet Portrait (768x1024)', 'demo-bar' ); ?>" rel="resp-tablet-portrait" href="#"><i class="fa fa-tablet fa-lg"></i></a>
+			<a title="<?php esc_html_e( 'Mobile Landscape (480x320)', 'demo-bar' ); ?>" rel="resp-mobile-landscape" href="#"><i class="fa fa-mobile fa-rotate-270 fa-lg"></i></a>
+			<a title="<?php esc_html_e( 'Mobile Portrait (320x480)', 'demo-bar' ); ?>" rel="resp-mobile-portrait" href="#"><i class="fa fa-mobile fa-lg"></i></a>
 		</div>
 		<div id="buttons">
 			<?php if ( isset( $sites[ $current_demo ]['download_url'] ) && ! empty( $sites[ $current_demo ]['download_url'] ) && true === $demobar_options['show_purchase_button'] ) : ?>
