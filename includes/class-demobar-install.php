@@ -57,8 +57,6 @@ class DemoBar_Install {
 			'show_close_button'      => true,
 			// Page options.
 			'demo_page'              => '',
-			// Advance options.
-			'custom_css'             => '',
 		);
 		return $default;
 	}

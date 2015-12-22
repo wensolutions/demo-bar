@@ -18,10 +18,6 @@ $demobar_options = get_option( 'demobar_options' );
 	<?php if ( isset( $demobar_options['background_color'] ) && ! empty( $demobar_options['background_color'] ) ) : ?>
 		<style>#db-switcher{background-color:<?php echo esc_attr( $demobar_options['background_color'] ); ?>;}</style>
 	<?php endif ?>
-	<?php if ( isset( $demobar_options['custom_css'] ) && ! empty( $demobar_options['custom_css'] ) ) : ?>
-		<style><?php echo esc_textarea( $demobar_options['custom_css'] ); ?></style>
-	<?php endif ?>
-
 	<script src="<?php echo esc_url( site_url() ); ?>/wp-includes/js/jquery/jquery.js"></script>
 	<script src="<?php echo esc_url( site_url() ); ?>/wp-includes/js/jquery/jquery-migrate.min.js"></script>
 	<script src="<?php echo DEMOBAR_PLUGIN_URL; ?>/js/front.js"></script>
