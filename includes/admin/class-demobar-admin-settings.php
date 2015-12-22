@@ -128,8 +128,6 @@ class DemoBar_Admin_Settings {
 		// Page settings.
 		add_settings_section( 'demobar_page_settings', __( 'Page Settings', 'demo-bar' ) , array( $this, 'plugin_section_page_text_callback' ), 'demobar-page' );
 		add_settings_field( 'demobar_field_demo_page', __( 'Demo Page', 'demo-bar' ), array( $this, 'demobar_field_demo_page_callback' ), 'demobar-page', 'demobar_page_settings' );
-		add_settings_field( 'demobar_field_page_meta_description', __( 'Meta Description', 'demo-bar' ), array( $this, 'demobar_field_page_meta_description_callback' ), 'demobar-page', 'demobar_page_settings' );
-		add_settings_field( 'demobar_field_page_meta_keywords', __( 'Meta Keywords', 'demo-bar' ), array( $this, 'demobar_field_page_meta_keywords_callback' ), 'demobar-page', 'demobar_page_settings' );
 
 		// Advance settings.
 		add_settings_section( 'demobar_advance_settings', __( 'Advance Settings', 'demo-bar' ) , array( $this, 'plugin_section_advance_text_callback' ), 'demobar-advance' );
@@ -152,8 +150,6 @@ class DemoBar_Admin_Settings {
 		$input['show_purchase_button']   = isset( $input['show_purchase_button'] ) ? true : false;
 		$input['show_close_button']      = isset( $input['show_close_button'] ) ? true : false;
 		$input['demo_page']              = absint( $input['demo_page'] );
-		$input['page_meta_description']  = wp_filter_nohtml_kses( $input['page_meta_description'] );
-		$input['page_meta_keywords']     = wp_filter_nohtml_kses( $input['page_meta_keywords'] );
 		$input['custom_css']             = wp_filter_nohtml_kses( $input['custom_css'] );
 		return $input;
 	}
@@ -283,36 +279,6 @@ class DemoBar_Admin_Settings {
 			echo '&nbsp;&nbsp;';
 			echo '<a href="' . esc_url( get_permalink( $demo_page ) ) . '" target="_blank">' . get_permalink( $demo_page ) . '</a>';
 		}
-	}
-
-	/**
-	 * Callback function for settings field - page_meta_description.
-	 *
-	 * @since 1.0.0
-	 */
-	function demobar_field_page_meta_description_callback() {
-		$page_meta_description = '';
-		if ( isset( $this->options['page_meta_description'] ) ) {
-			$page_meta_description = $this->options['page_meta_description'];
-		}
-		?>
-		<textarea name="demobar_options[page_meta_description]" rows="5" class="large-text"><?php echo esc_textarea( $page_meta_description ); ?></textarea>
-		<?php
-	}
-
-	/**
-	 * Callback function for settings field - page_meta_keywords.
-	 *
-	 * @since 1.0.0
-	 */
-	function demobar_field_page_meta_keywords_callback() {
-		$page_meta_keywords = '';
-		if ( isset( $this->options['page_meta_keywords'] ) ) {
-			$page_meta_keywords = $this->options['page_meta_keywords'];
-		}
-		?>
-		<textarea name="demobar_options[page_meta_keywords]" rows="5" class="large-text"><?php echo esc_textarea( $page_meta_keywords ); ?></textarea>
-		<?php
 	}
 
 	/**

@@ -57,8 +57,6 @@ class DemoBar_Install {
 			'show_close_button'      => true,
 			// Page options.
 			'demo_page'              => '',
-			'page_meta_description'  => '',
-			'page_meta_keywords'     => '',
 			// Advance options.
 			'custom_css'             => '',
 		);
