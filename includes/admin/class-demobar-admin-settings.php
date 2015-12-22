@@ -179,8 +179,22 @@ class DemoBar_Admin_Settings {
 			$logo = $this->options['logo'];
 		}
 		?>
-		<input type="text" name="demobar_options[logo]" value="<?php echo esc_url( $logo ); ?>" />
-		<p class="description"><?php esc_html_e( 'Enter full URL', 'demo-bar' ) ?></p><!-- .description -->
+		<input type="text" name="demobar_options[logo]" value="<?php echo esc_url( $logo ); ?>" class="img" />
+		<input type="button" class="select-img button button-primary" value="<?php _e( 'Upload', 'demo-bar' ); ?>" data-uploader_title="<?php _e( 'Select Image', 'demo-bar' ); ?>" data-uploader_button_text="<?php _e( 'Choose Image', 'demo-bar' ); ?>" />
+		<?php
+		$full_image_url = '';
+		if ( ! empty( $logo ) ){
+			$full_image_url = $logo;
+		}
+		$wrap_style = '';
+		if ( empty( $full_image_url ) ) {
+			$wrap_style = ' style="display:none;" ';
+		}
+		?>
+		<div class="db-preview-wrap" <?php echo $wrap_style; ?>>
+		  <img src="<?php echo esc_url( $full_image_url ); ?>" alt="<?php _e( 'Preview', 'demo-bar' ); ?>" style="max-width: 150px;"  />
+		</div><!-- .db-preview-wrap -->
+
 		<?php
 	}
 
@@ -195,7 +209,7 @@ class DemoBar_Admin_Settings {
 			$background_color = $this->options['background_color'];
 		}
 		?>
-		<input type="text" name="demobar_options[background_color]" value="<?php echo esc_url( $background_color ); ?>" class="select-color"/>
+		<input type="text" name="demobar_options[background_color]" value="<?php echo esc_url( $background_color ); ?>" class="select-color" data-default-color="#363636" />
 		<?php
 	}
 
@@ -266,7 +280,6 @@ class DemoBar_Admin_Settings {
 			echo '<a href="' . esc_url( get_permalink( $demo_page ) ) . '" target="_blank">' . get_permalink( $demo_page ) . '</a>';
 		}
 	}
-
 }
 
 new DemoBar_Admin_Settings();
