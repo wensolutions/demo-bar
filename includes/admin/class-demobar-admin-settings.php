@@ -186,7 +186,7 @@ class DemoBar_Admin_Settings {
 		<input type="button" class="select-img button button-primary" value="<?php _e( 'Upload', 'demo-bar' ); ?>" data-uploader_title="<?php _e( 'Select Image', 'demo-bar' ); ?>" data-uploader_button_text="<?php _e( 'Choose Image', 'demo-bar' ); ?>" style="margin-bottom:5px;" />
 		<?php
 		$full_image_url = '';
-		if ( ! empty( $logo ) ){
+		if ( ! empty( $logo ) ) {
 			$full_image_url = $logo;
 		}
 		$wrap_style = '';
