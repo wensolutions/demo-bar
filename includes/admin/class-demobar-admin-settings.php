@@ -75,6 +75,9 @@ class DemoBar_Admin_Settings {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
 
+		// Media.
+		wp_enqueue_media();
+
 		// Custom.
 		wp_enqueue_script( 'demobar-script', DEMOBAR_PLUGIN_URL . '/js/admin.js', array( 'jquery' ) );
 
@@ -180,7 +183,7 @@ class DemoBar_Admin_Settings {
 		}
 		?>
 		<input type="text" name="demobar_options[logo]" value="<?php echo esc_url( $logo ); ?>" class="img" />
-		<input type="button" class="select-img button button-primary" value="<?php _e( 'Upload', 'demo-bar' ); ?>" data-uploader_title="<?php _e( 'Select Image', 'demo-bar' ); ?>" data-uploader_button_text="<?php _e( 'Choose Image', 'demo-bar' ); ?>" />
+		<input type="button" class="select-img button button-primary" value="<?php _e( 'Upload', 'demo-bar' ); ?>" data-uploader_title="<?php _e( 'Select Image', 'demo-bar' ); ?>" data-uploader_button_text="<?php _e( 'Choose Image', 'demo-bar' ); ?>" style="margin-bottom:5px;" />
 		<?php
 		$full_image_url = '';
 		if ( ! empty( $logo ) ){
