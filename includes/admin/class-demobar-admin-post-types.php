@@ -81,20 +81,20 @@ class DemoBar_Admin_Post_Types {
 	 * @since 1.0.0
 	 *
 	 * @param string $column_name The name of the column to display.
-	 * @param int    $post_ID     The current post ID.
+	 * @param int    $post_id     The current post ID.
 	 */
-	function custom_column_content( $column_name, $post_ID ) {
+	function custom_column_content( $column_name, $post_id ) {
 		switch ( $column_name ) {
 			case 'site_url':
-				echo esc_url( get_post_meta( $post_ID, 'demo_bar_site_url', true ) );
+				echo esc_url( get_post_meta( $post_id, 'demo_bar_site_url', true ) );
 				break;
 			case 'download_url':
-				echo esc_url( get_post_meta( $post_ID, 'demo_bar_download_url', true ) );
+				echo esc_url( get_post_meta( $post_id, 'demo_bar_download_url', true ) );
 				break;
 			case 'thumb':
-				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_ID ), 'thumbnail' );
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
 				if ( ! empty( $image ) ) {
-					echo '<a href="' . esc_url( get_edit_post_link( $post_ID ) ) . '">';
+					echo '<a href="' . esc_url( get_edit_post_link( $post_id ) ) . '">';
 					echo '<img src="' . esc_url( $image[0] ) . '" width="50"/>';
 					echo '</a>';
 				}

@@ -62,11 +62,11 @@ class DemoBar_Admin_Meta_Boxes {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int     $post_ID Post ID.
+	 * @param int     $post_id Post ID.
 	 * @param WP_Post $post    Post object.
 	 * @param bool    $update  Whether this is an existing post being updated or not.
 	 */
-	function save_meta_boxes( $post_ID, $post, $update ) {
+	function save_meta_boxes( $post_id, $post, $update ) {
 		// Verify nonce.
 		if ( ! isset( $_POST['demobar_meta_nonce'] ) || ! wp_verify_nonce( $_POST['demobar_meta_nonce'], 'demobar_save_data' ) ) {
 			return;
@@ -75,16 +75,16 @@ class DemoBar_Admin_Meta_Boxes {
 		if ( defined( 'DOING_AUTOSAVE' ) || is_int( wp_is_post_revision( $post ) ) || is_int( wp_is_post_autosave( $post ) ) ) {
 			return;
 		}
-		// Check the post being saved == the $post_ID to prevent triggering this call for other save_post events.
-		if ( empty( $_POST['post_ID'] ) || absint( $_POST['post_ID'] ) !== $post_ID ) {
+		// Check the post being saved == the $post_id to prevent triggering this call for other save_post events.
+		if ( empty( $_POST['post_id'] ) || absint( $_POST['post_id'] ) !== $post_id ) {
 			return;
 		}
 		// Check permission.
 		if ( 'page' === $_POST['post_type'] ) {
-			if ( ! current_user_can( 'edit_page', $post_ID ) ) {
+			if ( ! current_user_can( 'edit_page', $post_id ) ) {
 				return;
 			}
-		} else if ( ! current_user_can( 'edit_post', $post_ID ) ) {
+		} else if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return;
 		}
 		$site_settings_fields = array(
@@ -95,9 +95,9 @@ class DemoBar_Admin_Meta_Boxes {
 			if ( isset( $_POST[ $key ] ) ) {
 				$post_value = $_POST[ $key ];
 				if ( empty( $post_value ) ) {
-					delete_post_meta( $post_ID, $key );
+					delete_post_meta( $post_id, $key );
 				} else {
-					update_post_meta( $post_ID, $key, esc_url_raw( $post_value ) );
+					update_post_meta( $post_id, $key, esc_url_raw( $post_value ) );
 				}
 			}
 		} // End foreach loop.
