@@ -20,7 +20,12 @@ class DemoBar_Post_Types {
 	 * Hook in methods.
 	 */
 	public static function init() {
+
+		// Register post types.
 		add_action( 'init', array( __CLASS__, 'register_post_types' ), 5 );
+		// Add thumbnail support if not added by theme.
+		add_action( 'after_setup_theme', array( __CLASS__, 'add_thumbnail_support' ), 99 );
+
 	}
 
 	/**
@@ -65,6 +70,21 @@ class DemoBar_Post_Types {
 			'supports'           => array( 'title', 'thumbnail' ),
 		);
 		register_post_type( 'dbsite', $args );
+	}
+
+	/**
+	 * Add extra theme support for thumbanil.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function add_thumbnail_support() {
+		$supportedTypes = get_theme_support( 'post-thumbnails' );
+		if ( false === $supportedTypes ) {
+			add_theme_support( 'post-thumbnails', array( 'dbsite' ) );
+		} elseif ( is_array( $supportedTypes ) ) {
+			$supportedTypes[0][] = 'dbsite';
+			add_theme_support( 'post-thumbnails', $supportedTypes[0] );
+		}
 	}
 }
 
