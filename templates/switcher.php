@@ -79,7 +79,7 @@ if ( false !== $valid_key ) {
 			
 		</div> <!-- #dropdown -->
 		
-		<?php if ( isset( $demobar_options['show_responsive_button'] ) && 1 === $demobar_options['show_responsive_button'] ) :  ?>
+		<?php if ( isset( $demobar_options['show_responsive_button'] ) && true === $demobar_options['show_responsive_button'] ) :  ?>
 		<div id="responsive">
 			<a title="<?php esc_html_e( 'Desktop', 'demo-bar' ); ?>" rel="resp-desktop" href="#" class="current"><i class="fa fa-desktop fa-lg"></i></a>
 			<a title="<?php esc_html_e( 'Tablet Landscape (1024x768)', 'demo-bar' ); ?>" rel="resp-tablet-landscape" href="#"><i class="fa fa-tablet fa-rotate-270 fa-lg"></i></a>
@@ -93,7 +93,7 @@ if ( false !== $valid_key ) {
 			<?php if ( isset( $sites[ $current_demo ]['download_url'] ) && ! empty( $sites[ $current_demo ]['download_url'] ) && true === $demobar_options['show_purchase_button'] ) : ?>
 				<a href="<?php echo esc_url( $sites[ $current_demo ]['download_url'] ); ?>" class="btn btn-download"><?php esc_html_e( 'Download', 'demo-bar' ); ?></a>
 			<?php endif ?>
-			<?php if ( isset( $sites[ $current_demo ]['site_url'] ) && true === $demobar_options['show_close_button'] ) :  ?>
+			<?php if ( isset( $sites[ $current_demo ]['site_url'] ) && ! empty( $sites[ $current_demo ]['site_url'] ) &&  true === $demobar_options['show_close_button'] ) :  ?>
 				<a href="<?php echo esc_url( $sites[ $current_demo ]['site_url'] ); ?>" class="btn btn-close"><i class="fa fa-close fa-lg"></i><?php esc_html_e( 'Close', 'demo-bar' ); ?></a>
 			<?php endif ?>
 		</div><!-- #buttons -->
