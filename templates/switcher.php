@@ -46,9 +46,12 @@ if ( false !== $valid_key ) {
 			</div><!-- #branding -->
 		<?php endif ?>
 		<div id="dropdown">
-			<?php esc_html_e( 'Select', 'demo-bar' ); ?>
+			<?php 
+			$selected = esc_html( 'Select', 'demo-bar' ); 
+			$dropdown_list = "";
+			?>
 			<?php if ( ! empty( $sites ) ) : ?>
-				<ul>
+				<?php $dropdown_list .= '<ul>'; ?>
 				<?php foreach ( $sites as $site ) : ?>
 					<?php
 						$link = add_query_arg(
@@ -57,13 +60,23 @@ if ( false !== $valid_key ) {
 							),
 							get_permalink()
 						);
+
+						if( isset( $_GET['demo'] ) && $_GET['demo'] === $site['slug'] ){
+							$selected = esc_html( $site['title'] );
+						}
+
+						$dropdown_list .= '<li>';
+						$dropdown_list .= sprintf( '<a href="%s">%s</a>', esc_url( $link ), esc_html( $site['title'] ) );
+						$dropdown_list .= '</li>';
 					?>
-					<li>
-						<a href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $site['title'] ); ?></a>
-					</li>
 				<?php endforeach; ?>
-				</ul>
+				<?php $dropdown_list .="</ul>"; ?>
 			<?php endif ?>
+
+			<?php
+			echo $selected;
+			echo $dropdown_list;
+			?>
 		</div> <!-- #dropdown -->
 		<div id="responsive">
 			<a title="<?php esc_html_e( 'Desktop', 'demo-bar' ); ?>" rel="resp-desktop" href="#" class="current"><i class="fa fa-desktop fa-lg"></i></a>

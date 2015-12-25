@@ -71,14 +71,17 @@ class DemoBar_Admin_Meta_Boxes {
 		if ( ! isset( $_POST['demobar_meta_nonce'] ) || ! wp_verify_nonce( $_POST['demobar_meta_nonce'], 'demobar_save_data' ) ) {
 			return;
 		}
+
 		// Bail if auto save or revision.
 		if ( defined( 'DOING_AUTOSAVE' ) || is_int( wp_is_post_revision( $post ) ) || is_int( wp_is_post_autosave( $post ) ) ) {
 			return;
 		}
+
 		// Check the post being saved == the $post_id to prevent triggering this call for other save_post events.
-		if ( empty( $_POST['post_id'] ) || absint( $_POST['post_id'] ) !== $post_id ) {
+		if ( '' == $_POST['post_ID'] || absint( $_POST['post_ID'] ) !== $post_id ) {
 			return;
 		}
+		
 		// Check permission.
 		if ( 'page' === $_POST['post_type'] ) {
 			if ( ! current_user_can( 'edit_page', $post_id ) ) {

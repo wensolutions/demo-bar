@@ -19,7 +19,14 @@
 				$(this).addClass("open");
 				$(this).children("ul").slideDown("fast");
 			}
+			e.stopPropagation();
 		});
+
+		$("body, iframe > *").click(function () { // binding onclick to body
+	        $("#dropdown").children("ul").slideUp("fast");
+	        $("#dropdown").removeClass("open");
+	    }); 
+
 
 	    // Responsive.
 	    $('#responsive a').on( 'click', function(e){
