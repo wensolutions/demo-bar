@@ -1,8 +1,8 @@
 === Demo Bar ===
-Contributors: rabmalin
-Donate link: http://www.nilambar.net
+Contributors: wen-solutions, wenthemes
+Donate link: http://wensolutions.com/plugins/demo-bar/
 Tags: demo, bar,
-Requires at least: 4.1
+Requires at least: 4.0
 Tested up to: 4.4
 Stable tag: 1.0
 License: GPLv2 or later

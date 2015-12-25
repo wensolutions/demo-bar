@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: Demo Bar
- * Plugin URI: https://github.com/ernilambar/demo-bar
+ * Plugin URI: http://wensolutions.com/plugins/demo-bar/
  * Description: This plugin helps to add demo bar for displaying your different theme demos.
- * Version: 1.0.0
- * Author: Nilambar Sharma
- * Author URI: http://www.nilambar.net
- * Requires at least: 4.1
+ * Version: 1.0
+ * Author: WEN Solutions
+ * Author URI: http://wensolutions.com
+ * Requires at least: 4.0
  * Tested up to: 4.4
  * Text Domain: demo-bar
  *
