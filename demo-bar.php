@@ -158,20 +158,20 @@ if ( ! class_exists( 'DemoBar' ) ) :
 			// Load plugin text domain.
 			load_plugin_textdomain( 'demo-bar', false, basename( dirname( __FILE__ ) ) . '/languages' );
 		}
-}
+	}
 endif;
 
 /**
  * Main instance of DemoBar.
  *
- * Returns the main instance of DBR to prevent the need to use globals.
+ * Returns the main instance of dbr to prevent the need to use globals.
  *
  * @since  1.0.0
  * @return DemoBar
  */
-function DBR() {
+function dbr() {
 	return DemoBar::instance();
 }
 
 // Global for backwards compatibility.
-$GLOBALS['demobar'] = DBR();
+$GLOBALS['demobar'] = dbr();
