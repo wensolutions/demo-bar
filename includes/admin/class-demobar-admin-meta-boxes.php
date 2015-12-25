@@ -31,7 +31,9 @@ class DemoBar_Admin_Meta_Boxes {
 			'dbsite-settings',
 			esc_html__( 'Site Info', 'demo-bar' ),
 			array( $this, 'render_site_settings_metabox' ),
-			'dbsite'
+			'dbsite',
+			'normal',
+			'high'
 		);
 	}
 	/**
@@ -81,7 +83,7 @@ class DemoBar_Admin_Meta_Boxes {
 		if ( '' == $_POST['post_ID'] || absint( $_POST['post_ID'] ) !== $post_id ) {
 			return;
 		}
-		
+
 		// Check permission.
 		if ( 'page' === $_POST['post_type'] ) {
 			if ( ! current_user_can( 'edit_page', $post_id ) ) {
