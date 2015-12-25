@@ -76,9 +76,9 @@ if ( false !== $valid_key ) {
 			<?php
 			// Display select box dropdown.
 			echo wp_kses_post( $selected . $dropdown_list ); ?>
-			
+
 		</div> <!-- #dropdown -->
-		
+
 		<?php if ( isset( $demobar_options['show_responsive_button'] ) && true === $demobar_options['show_responsive_button'] ) :  ?>
 		<div id="responsive">
 			<a title="<?php esc_html_e( 'Desktop', 'demo-bar' ); ?>" rel="resp-desktop" href="#" class="current"><i class="fa fa-desktop fa-lg"></i></a>
@@ -88,13 +88,13 @@ if ( false !== $valid_key ) {
 			<a title="<?php esc_html_e( 'Mobile Portrait (320x480)', 'demo-bar' ); ?>" rel="resp-mobile-portrait" href="#"><i class="fa fa-mobile fa-lg"></i></a>
 		</div>
 		<?php endif; ?>
-		
+
 		<div id="buttons">
 			<?php if ( isset( $sites[ $current_demo ]['download_url'] ) && ! empty( $sites[ $current_demo ]['download_url'] ) && true === $demobar_options['show_purchase_button'] ) : ?>
 				<a href="<?php echo esc_url( $sites[ $current_demo ]['download_url'] ); ?>" class="btn btn-download"><?php esc_html_e( 'Download', 'demo-bar' ); ?></a>
 			<?php endif ?>
 			<?php if ( isset( $sites[ $current_demo ]['site_url'] ) && ! empty( $sites[ $current_demo ]['site_url'] ) &&  true === $demobar_options['show_close_button'] ) :  ?>
-				<a href="<?php echo esc_url( $sites[ $current_demo ]['site_url'] ); ?>" class="btn btn-close"><i class="fa fa-close fa-lg"></i><?php esc_html_e( 'Close', 'demo-bar' ); ?></a>
+				<a href="<?php echo esc_url( $sites[ $current_demo ]['site_url'] ); ?>" class="btn btn-close"><i class="fa fa-close fa-lg"></i></a>
 			<?php endif ?>
 		</div><!-- #buttons -->
 	</div>
