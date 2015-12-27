@@ -115,12 +115,9 @@ body {
 	background-color: #358ced;
 }
 .btn-close{
-	color: #ffffff;
-	border: 1px #AAA solid;
+	color: #FFFFFF;
 	text-decoration: none;
-	padding: 3px 6px;
-	background-color: #666;
 }
 .btn-close:hover{
-	background-color: #7a7a7a;
+	color: #CCCCCC;
 }
