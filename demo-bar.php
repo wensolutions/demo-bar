@@ -147,6 +147,11 @@ if ( ! class_exists( 'DemoBar' ) ) :
 		private function init_hooks() {
 			register_activation_hook( __FILE__, array( 'DemoBar_Install', 'install' ) );
 			add_action( 'init', array( $this, 'init' ), 0 );
+
+			// Add settings link in plugin listing.
+			$plugin = plugin_basename( __FILE__ );
+			add_filter( 'plugin_action_links_' . $plugin, array( $this, 'add_settings_link' ) );
+
 		}
 
 		/**
@@ -157,6 +162,26 @@ if ( ! class_exists( 'DemoBar' ) ) :
 		function init() {
 			// Load plugin text domain.
 			load_plugin_textdomain( 'demo-bar', false, basename( dirname( __FILE__ ) ) . '/languages' );
+		}
+
+		/**
+		 * Links in plugin listing.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $links Array of links.
+		 * @return array Modified array of links.
+		 */
+		public static function add_settings_link( $links ) {
+			$url = add_query_arg( array(
+				'page'      => 'demo-bar',
+				'post_type' => 'dbsite',
+				),
+				admin_url( 'edit.php' )
+			);
+			$settings_link = '<a href="' . esc_url( $url ) . '">' . __( 'Settings', 'demo-bar' ) . '</a>';
+			array_unshift( $links, $settings_link );
+			return $links;
 		}
 	}
 endif;
