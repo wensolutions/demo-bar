@@ -1,5 +1,5 @@
 === Demo Bar ===
-Contributors: wen-solutions, wenthemes
+Contributors: WEN Solutions, wenthemes
 Donate link: http://wensolutions.com/plugins/demo-bar/
 Tags: demo, bar,
 Requires at least: 4.0
