@@ -90,25 +90,32 @@ class DemoBar_Admin_Settings {
 	 */
 	function plugin_notices() {
 
-		$demobar_options = get_option( 'demobar_options' );
-		if ( isset( $demobar_options['demo_page'] ) && absint( $demobar_options['demo_page'] ) > 0 ) {
-			return;
+		// Updated message.
+		if ( isset( $_REQUEST['settings-updated'] ) && true === (bool)$_REQUEST['settings-updated'] ) {
+			$class   = 'updated notice is-dismissible';
+			$message = __( 'Settings saved.', 'demo-bar' );
+			echo '<div class="' . $class . '"><p>' . $message . '</p></div>';
 		}
-		$class = 'error';
-		$settings_url = add_query_arg(
-			array(
-				'post_type' => 'dbsite',
-				'page'      => 'demo-bar',
-			),
-			admin_url( 'edit.php' )
-		);
-		$message = __( 'Demo Page is not set.', 'demo-bar' );
-		$message .= ' ' . sprintf( __( '%sDemo Bar Settings%s', 'demo-bar' ),
-			'<a href="' . esc_url( $settings_url ) . '">',
-			'</a>'
-		);
-		echo '<div class="' . $class .'"><p>' . $message . '</p></div>';
 
+		// Plugin settings message.
+		$demobar_options = get_option( 'demobar_options' );
+		if ( ! isset( $demobar_options['demo_page'] ) || absint( $demobar_options['demo_page'] ) < 1 ) {
+			// Plugin settings not configured properly.
+			$class = 'error';
+			$settings_url = add_query_arg(
+				array(
+					'post_type' => 'dbsite',
+					'page'      => 'demo-bar',
+				),
+				admin_url( 'edit.php' )
+			);
+			$message = __( 'Demo Page is not set.', 'demo-bar' );
+			$message .= ' ' . sprintf( __( '%sDemo Bar Settings%s', 'demo-bar' ),
+				'<a href="' . esc_url( $settings_url ) . '">',
+				'</a>'
+			);
+			echo '<div class="' . $class . '"><p>' . $message . '</p></div>';
+		}
 	}
 
 	/**
