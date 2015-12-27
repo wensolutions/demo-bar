@@ -58,7 +58,7 @@ body {
 /* Dropdown */
 #dropdown {
 	padding: 10px;
-	width: 266px;
+	width: 265px;
 	position: relative;
 	cursor: pointer;
 	background: #2b2b2b;
@@ -72,13 +72,19 @@ body {
 	position: absolute;
 	top: 100%;
 	width: 100%;
-	padding: 0px 0px;
+	padding: 0;
 	display: none;
 	background: #2b2b2b;
 	list-style-type: none;
 	left: 0;
+	height: auto;
+	max-height: 500px;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
-#dropdown ul li { font-size: 0.9em; }
+#dropdown ul li {
+	font-size: 0.9em;
+}
 
 #dropdown ul li a {
 	text-decoration: none;
@@ -106,7 +112,7 @@ body {
 	margin-right: 10px;
 }
 .btn-download:hover{
-	background-color:#358ced;
+	background-color: #358ced;
 }
 .btn-close{
 	color: #ffffff;
