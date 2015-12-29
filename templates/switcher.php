@@ -12,7 +12,7 @@ $demobar_options = get_option( 'demobar_options' );
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title><?php bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
+	<title>asdf<?php bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
 	<link rel="stylesheet" href="<?php echo esc_url( DEMOBAR_PLUGIN_URL ); ?>/third-party/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="<?php echo esc_url( DEMOBAR_PLUGIN_URL ); ?>/css/front.css">
 	<?php if ( isset( $demobar_options['background_color'] ) && ! empty( $demobar_options['background_color'] ) ) : ?>
@@ -21,6 +21,7 @@ $demobar_options = get_option( 'demobar_options' );
 	<script src="<?php echo esc_url( site_url() ); ?>/wp-includes/js/jquery/jquery.js"></script>
 	<script src="<?php echo esc_url( site_url() ); ?>/wp-includes/js/jquery/jquery-migrate.min.js"></script>
 	<script src="<?php echo esc_url( DEMOBAR_PLUGIN_URL ); ?>/js/front.js"></script>
+	<?php wp_head(); ?>
 </head>
 <?php
 	$current_demo = '';
@@ -100,6 +101,8 @@ if ( false !== $valid_key ) {
 	</div>
 	<?php if ( isset( $sites[ $current_demo ]['site_url'] ) ) :  ?>
 		<iframe id="frame-area" src="<?php echo esc_url( $sites[ $current_demo ]['site_url'] ); ?>" frameborder="0" width="100%"></iframe>
-	<?php endif ?>
+	<?php endif; ?>
+
+	<?php wp_footer(); ?>
 </body>
 </html>
