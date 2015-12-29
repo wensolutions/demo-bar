@@ -12,15 +12,10 @@ $demobar_options = get_option( 'demobar_options' );
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title>asdf<?php bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
-	<link rel="stylesheet" href="<?php echo esc_url( DEMOBAR_PLUGIN_URL ); ?>/third-party/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="<?php echo esc_url( DEMOBAR_PLUGIN_URL ); ?>/css/front.css">
+	<title><?php bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
 	<?php if ( isset( $demobar_options['background_color'] ) && ! empty( $demobar_options['background_color'] ) ) : ?>
 		<style>#db-switcher{background-color:<?php echo esc_attr( $demobar_options['background_color'] ); ?>;}</style>
 	<?php endif ?>
-	<script src="<?php echo esc_url( site_url() ); ?>/wp-includes/js/jquery/jquery.js"></script>
-	<script src="<?php echo esc_url( site_url() ); ?>/wp-includes/js/jquery/jquery-migrate.min.js"></script>
-	<script src="<?php echo esc_url( DEMOBAR_PLUGIN_URL ); ?>/js/front.js"></script>
 	<?php wp_head(); ?>
 </head>
 <?php

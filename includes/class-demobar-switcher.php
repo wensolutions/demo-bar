@@ -21,6 +21,7 @@ class DemoBar_Switcher {
 	 */
 	public static function init() {
 		add_filter( 'template_include', array( __CLASS__, 'custom_template' ), 99 );
+		add_filter( 'wp_enqueue_scripts', array( __CLASS__, 'front_scripts' ), 99 );
 	}
 
 	/**
@@ -41,6 +42,22 @@ class DemoBar_Switcher {
 			}
 		}
 		return $template;
+	}
+
+	/**
+	 * Load front scripts.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function front_scripts() {
+		$demobar_options = get_option( 'demobar_options' );
+		if ( isset( $demobar_options['demo_page'] ) && absint( $demobar_options['demo_page'] ) > 0 ) {
+			if ( is_page( absint( $demobar_options['demo_page'] ) ) ) {
+				wp_enqueue_style( 'demobar-fontawesome', DEMOBAR_PLUGIN_URL . '/third-party/font-awesome/css/font-awesome.min.css', '', '4.4' );
+				wp_enqueue_style( 'demobar-style', DEMOBAR_PLUGIN_URL . '/css/front.css', '', '1.0.0' );
+				wp_enqueue_script( 'demobar-script', DEMOBAR_PLUGIN_URL . '/js/front.js', array( 'jquery' ), '1.0.0' );
+			}
+		}
 	}
 
 	/**
