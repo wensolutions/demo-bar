@@ -4,12 +4,32 @@
 }
 html {
 	margin: 0 !important;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust:     100%;
 }
 body {
 	overflow: hidden;
 	background-image: url('../images/bg.png');
 	background-repeat: repeat;
 	font-family: "Verdana", sans-serif;
+	font-size: 16px;
+}
+body::before,
+body::after{
+	background-color: transparent;
+	box-shadow: none;
+	height: 0 !important;
+}
+a,
+a:active,
+a:hover,
+a:focus,
+a:visited {
+	outline: none;
+	color: #FFFFFF;
+	background-color: transparent;
 }
 #db-switcher {
 	background-color: #363636;
