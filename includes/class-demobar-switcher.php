@@ -21,7 +21,10 @@ class DemoBar_Switcher {
 	 */
 	public static function init() {
 		add_filter( 'template_include', array( __CLASS__, 'custom_template' ), 99 );
-		add_filter( 'wp_enqueue_scripts', array( __CLASS__, 'front_scripts' ), 99 );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'front_scripts' ), 20 );
+		add_action( 'wp_head', array( __CLASS__, 'plugin_head' ), 99 );
+		add_action( 'demobar_head', array( __CLASS__, 'custom_css' ) );
+		add_action( 'wp_head', array( __CLASS__, 'custom_title' ) );
 	}
 
 	/**
@@ -58,6 +61,44 @@ class DemoBar_Switcher {
 				wp_enqueue_script( 'demobar-script', DEMOBAR_PLUGIN_URL . '/js/front.js', array( 'jquery' ), '1.0.0' );
 			}
 		}
+	}
+
+	/**
+	 * Register action in wp_head.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function plugin_head() {
+		do_action( 'demobar_head' );
+	}
+
+	/**
+	 * Custom CSS.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function custom_css() {
+		$demobar_options = get_option( 'demobar_options' );
+		if ( isset( $demobar_options['background_color'] ) && ! empty( $demobar_options['background_color'] ) ){
+			echo '<style>';
+			echo '#db-switcher{background-color:' . esc_attr( $demobar_options['background_color'] ) . ';}';
+			echo '</style>';
+		}
+	}
+
+	/**
+	 * Custom title.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function custom_title() {
+		?>
+		<?php if ( function_exists( 'wp_get_document_title' ) ) : ?>
+			<title><?php echo wp_get_document_title(); ?></title>
+		<?php else : ?>
+			<title><?php bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
+		<?php endif ?>
+		<?php
 	}
 
 	/**

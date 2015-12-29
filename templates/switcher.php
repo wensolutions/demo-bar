@@ -12,10 +12,6 @@ $demobar_options = get_option( 'demobar_options' );
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title><?php bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
-	<?php if ( isset( $demobar_options['background_color'] ) && ! empty( $demobar_options['background_color'] ) ) : ?>
-		<style>#db-switcher{background-color:<?php echo esc_attr( $demobar_options['background_color'] ); ?>;}</style>
-	<?php endif ?>
 	<?php wp_head(); ?>
 </head>
 <?php
