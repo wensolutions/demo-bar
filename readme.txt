@@ -14,6 +14,26 @@ Simple plugin for displaying demo
 
 This plugin helps to add demo bar for displaying your different theme demos.
 
+**Background Color:** You can play around with many different color schemes for customizing your demo bar background.
+
+**Show Responsive:** You can show options by checking this checkbox to show/hide responsive options. By this option, you will be able to switch to different device size.
+
+**Show Purchase:** You can show 'download' button by this option. This will show download button which when clicked redirects user to the 'download url' that is managed while adding sites via Add site section.
+
+**Show Close:** This button allows the option to Show/Hide the demobar in the demo site. The demo site will be added via 'Add Site' option.
+
+**Page settings:**
+
+**Demo Page:** This is the page where the demobar will appear. The site that is added will be shown in this page where you will be able to use the above mentioned features.
+
+**Demo Bar**
+
+**Add Site:** This option allows you to add the site link where the demo bar will appear.
+
+**Site URL:** This option allows you to add the site url where your demo bar will appear.
+
+**Download URL:** This option allows you to add link to any of your product or site.
+
 == Installation ==
 
 = Using The WordPress Dashboard =
@@ -48,6 +68,7 @@ Nice, make a post on the [Support Forum](http://wordpress.org/support/plugin/dem
 == Screenshots ==
 
 1. Plugin Settings
+2. Plugin Front end
 
 == Changelog ==
 
